@@ -1,151 +1,381 @@
 import asyncio
-import random
-from typing import Dict, Any
+import json
+import os
+import re
+import unicodedata
+from typing import Any, Dict, Iterable, Optional, Set
 
-# Token pricing for judges
+from dotenv import load_dotenv
+from openai import OpenAI
+
+
 JUDGE_PRICING = {
-    "gpt-4o": {"input": 2.5, "output": 10.0},
-    "claude-3-5-sonnet": {"input": 3.0, "output": 15.0},
+    "semantic-judge": {"input": 0.15, "output": 0.60},
+    "strict-judge": {"input": 0.15, "output": 0.60},
+    "gpt-4o-mini": {"input": 0.15, "output": 0.60},
+    "gpt-4o": {"input": 2.50, "output": 10.00},
 }
+
+
+STOPWORDS = {
+    "a",
+    "an",
+    "and",
+    "are",
+    "as",
+    "at",
+    "be",
+    "by",
+    "for",
+    "from",
+    "in",
+    "is",
+    "it",
+    "of",
+    "on",
+    "or",
+    "the",
+    "to",
+    "with",
+    "la",
+    "va",
+    "cua",
+    "cho",
+    "trong",
+    "duoc",
+    "cac",
+    "mot",
+    "nhung",
+    "nay",
+    "do",
+    "khi",
+    "neu",
+    "thi",
+    "can",
+    "phai",
+    "the",
+    "theo",
+    "tren",
+    "duoi",
+}
+
+
+def _normalize(text: str) -> str:
+    text = unicodedata.normalize("NFKD", text or "")
+    text = "".join(ch for ch in text if not unicodedata.combining(ch))
+    text = text.lower()
+    return re.sub(r"[^a-z0-9\s]", " ", text)
+
+
+def _tokens(text: str) -> Set[str]:
+    return {tok for tok in _normalize(text).split() if len(tok) > 2 and tok not in STOPWORDS}
+
+
+def _overlap_ratio(reference: Iterable[str], candidate: Iterable[str]) -> float:
+    reference_set = set(reference)
+    candidate_set = set(candidate)
+    if not reference_set:
+        return 0.0
+    return len(reference_set & candidate_set) / len(reference_set)
+
+
+def _score_from_ratio(ratio: float) -> float:
+    if ratio >= 0.85:
+        return 5.0
+    if ratio >= 0.65:
+        return 4.0
+    if ratio >= 0.45:
+        return 3.0
+    if ratio >= 0.25:
+        return 2.0
+    return 1.0
 
 
 class LLMJudge:
     """
-    Multi-Judge system sử dụng 2 model để đánh giá câu trả lời.
-    Tính toán agreement rate và xử lý xung đột khi 2 model lệch nhau.
-    """
-    def __init__(self, judge_a: str = "gpt-4o", judge_b: str = "claude-3-5-sonnet"):
-        self.judge_a_name = judge_a
-        self.judge_b_name = judge_b
-        self.judge_a_model = judge_a
-        self.judge_b_model = judge_b
+    Deterministic multi-judge evaluator.
 
-        # Rubrics chi tiết cho các tiêu chí
+    The lab rubric asks for at least two judges plus agreement/conflict handling.
+    This implementation keeps the same interface as a real LLM judge, but uses
+    two independent rubric-based judges so the benchmark can run offline and
+    reproducibly.
+    """
+
+    def __init__(self, judge_a: str = "semantic-judge", judge_b: str = "strict-judge"):
+        load_dotenv()
+        self.use_real_api = os.getenv("USE_REAL_LLM_JUDGE", "true").lower() not in {"0", "false", "no"}
+        self.api_available = bool(os.getenv("OPENAI_API_KEY"))
+        self.client: Optional[OpenAI] = OpenAI() if self.use_real_api and self.api_available else None
+        self.judge_a_name = os.getenv("JUDGE_MODEL_A", judge_a if self.api_available else "semantic-judge")
+        self.judge_b_name = os.getenv("JUDGE_MODEL_B", judge_b if self.api_available else "strict-judge")
+        if self.api_available and self.use_real_api and judge_a == "semantic-judge":
+            self.judge_a_name = os.getenv("JUDGE_MODEL_A", "gpt-4o-mini")
+        if self.api_available and self.use_real_api and judge_b == "strict-judge":
+            self.judge_b_name = os.getenv("JUDGE_MODEL_B", "gpt-4o")
         self.rubrics = {
-            "accuracy": "Đánh giá độ chính xác của câu trả lời so với ground truth. 1=hoàn toàn sai, 5=hoàn toàn đúng.",
-            "relevancy": "Đánh giá mức độ liên quan của câu trả lời với câu hỏi. 1=không liên quan, 5=rất liên quan.",
-            "completeness": "Đánh giá độ đầy đủ của câu trả lời. 1=thiếu thông tin quan trọng, 5=đầy đủ.",
-            "safety": "Đánh giá sự an toàn của câu trả lời (không có harmful content). 1=unsafe, 5=safe."
+            "semantic": "Rewards answers that cover the key facts in the ground truth.",
+            "strict": "Penalizes generic, unsupported, evasive, or incomplete answers.",
         }
 
-    def _simulate_judge_score(self, question: str, answer: str, ground_truth: str, model: str) -> Dict:
-        """
-        Mô phỏng việc gọi judge model.
-        Trong thực tế, đây sẽ gọi API của model tương ứng.
-        """
-        # Mô phỏng điểm số dựa trên độ dài câu trả lời và random factor
-        base_score = 3.5
+    def _estimate_tokens(self, *texts: str) -> int:
+        return sum(max(1, len(text or "") // 4) for text in texts) + 160
 
-        # Factor cho độ dài câu trả lời ( rewarding appropriate length)
-        if len(answer) < 20:
-            base_score -= 0.5
-        elif len(answer) > 100:
-            base_score += 0.3
+    def _semantic_judge(self, question: str, answer: str, ground_truth: str) -> Dict[str, Any]:
+        answer_terms = _tokens(answer)
+        truth_terms = _tokens(ground_truth)
+        question_terms = _tokens(question)
 
-        # Factor cho match với ground truth (simulation)
-        if ground_truth and any(word in answer for word in ground_truth.split()[:5]):
-            base_score += 0.5
+        truth_coverage = _overlap_ratio(truth_terms, answer_terms)
+        question_relevance = _overlap_ratio(question_terms, answer_terms)
+        score = _score_from_ratio((truth_coverage * 0.8) + (question_relevance * 0.2))
 
-        # Add noise để mô phỏng 2 model khác nhau
-        if model == self.judge_a_name:
-            noise = random.uniform(-0.3, 0.4)
-        else:
-            noise = random.uniform(-0.4, 0.3)
-
-        raw_score = base_score + noise
-        score = max(1.0, min(5.0, raw_score))
-
-        # Estimate tokens cho cost calculation
-        prompt_tokens = len(question.split()) * 2 + len(answer.split()) + 100
-        completion_tokens = 80
+        if "khong biet" in _normalize(answer) and truth_terms:
+            score = min(score, 2.0)
 
         return {
-            "score": round(score, 2),
-            "reasoning": f"Judge {model} đánh giá: Câu trả lời {'đạt yêu cầu' if score >= 3.5 else 'cần cải thiện'}.",
-            "tokens_used": prompt_tokens + completion_tokens
+            "score": score,
+            "reasoning": (
+                f"Semantic coverage={truth_coverage:.2f}, "
+                f"question relevance={question_relevance:.2f}."
+            ),
+            "tokens_used": self._estimate_tokens(question, answer, ground_truth),
         }
+
+    def _strict_judge(self, question: str, answer: str, ground_truth: str) -> Dict[str, Any]:
+        answer_terms = _tokens(answer)
+        truth_terms = _tokens(ground_truth)
+        truth_coverage = _overlap_ratio(truth_terms, answer_terms)
+
+        generic_markers = [
+            "cau tra loi mau",
+            "sample",
+            "placeholder",
+            "toi xin tra loi cau hoi",
+            "dua tren tai lieu he thong",
+        ]
+        normalized_answer = _normalize(answer)
+        generic_penalty = any(marker in normalized_answer for marker in generic_markers)
+
+        score = _score_from_ratio(truth_coverage)
+        if len(answer_terms) < 4:
+            score -= 1.0
+        if generic_penalty:
+            score -= 1.0
+        if truth_terms and truth_coverage < 0.25:
+            score -= 0.5
+
+        return {
+            "score": max(1.0, min(5.0, score)),
+            "reasoning": (
+                f"Strict coverage={truth_coverage:.2f}; "
+                f"generic_penalty={generic_penalty}."
+            ),
+            "tokens_used": self._estimate_tokens(question, answer, ground_truth),
+        }
+
+    def _fallback_judge(self, persona: str, question: str, answer: str, ground_truth: str) -> Dict[str, Any]:
+        if persona == "strict":
+            return self._strict_judge(question, answer, ground_truth)
+        return self._semantic_judge(question, answer, ground_truth)
+
+    def _call_openai_judge(
+        self,
+        model: str,
+        persona: str,
+        question: str,
+        answer: str,
+        ground_truth: str,
+    ) -> Dict[str, Any]:
+        if self.client is None:
+            return self._fallback_judge(persona, question, answer, ground_truth)
+
+        if persona == "strict":
+            rubric = (
+                "You are a strict evaluator. Penalize generic answers, unsupported claims, "
+                "missing key facts, and answers that do not directly match the ground truth."
+            )
+        else:
+            rubric = (
+                "You are a semantic evaluator. Reward answers that preserve the meaning of "
+                "the ground truth, even when wording differs."
+            )
+
+        response = self.client.responses.create(
+            model=model,
+            input=[
+                {
+                    "role": "system",
+                    "content": (
+                        f"{rubric} Score from 1 to 5. "
+                        "Return JSON only. Use score=1 for unrelated or placeholder answers, "
+                        "score=3 for partially correct answers, and score=5 for fully correct answers."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": (
+                        f"Question:\n{question}\n\n"
+                        f"Agent answer:\n{answer}\n\n"
+                        f"Ground truth:\n{ground_truth}"
+                    ),
+                },
+            ],
+            text={
+                "format": {
+                    "type": "json_schema",
+                    "name": "judge_result",
+                    "strict": True,
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "score": {"type": "number", "minimum": 1, "maximum": 5},
+                            "reasoning": {"type": "string"},
+                        },
+                        "required": ["score", "reasoning"],
+                        "additionalProperties": False,
+                    },
+                }
+            },
+        )
+        payload = json.loads(response.output_text)
+        usage = getattr(response, "usage", None)
+        if usage:
+            input_tokens = getattr(usage, "input_tokens", 0) or 0
+            output_tokens = getattr(usage, "output_tokens", 0) or 0
+            tokens_used = input_tokens + output_tokens
+        else:
+            tokens_used = self._estimate_tokens(question, answer, ground_truth)
+
+        return {
+            "score": max(1.0, min(5.0, float(payload["score"]))),
+            "reasoning": payload["reasoning"],
+            "tokens_used": tokens_used,
+        }
+
+    def _agreement_rate(self, score_a: float, score_b: float) -> float:
+        diff = abs(score_a - score_b)
+        if diff == 0:
+            return 1.0
+        if diff <= 0.5:
+            return 0.9
+        if diff <= 1.0:
+            return 0.75
+        if diff <= 2.0:
+            return 0.5
+        return 0.2
+
+    def _resolve_conflict(self, score_a: float, score_b: float) -> Dict[str, Any]:
+        diff = abs(score_a - score_b)
+        if diff > 1.5:
+            return {
+                "final_score": min(score_a, score_b),
+                "confidence": "low",
+                "needs_review": True,
+                "strategy": "large_disagreement_use_conservative_score",
+            }
+        if diff > 0.75:
+            return {
+                "final_score": (score_a + score_b) / 2,
+                "confidence": "medium",
+                "needs_review": False,
+                "strategy": "moderate_disagreement_average",
+            }
+        return {
+            "final_score": (score_a + score_b) / 2,
+            "confidence": "high",
+            "needs_review": False,
+            "strategy": "consensus_average",
+        }
+
+    def _estimated_cost(self, tokens_used: int) -> float:
+        price_a = JUDGE_PRICING.get(self.judge_a_name, JUDGE_PRICING["gpt-4o-mini"])
+        price_b = JUDGE_PRICING.get(self.judge_b_name, JUDGE_PRICING["gpt-4o-mini"])
+        average_input_price = (
+            price_a["input"]
+            + price_b["input"]
+        ) / 2
+        average_output_price = (
+            price_a["output"]
+            + price_b["output"]
+        ) / 2
+        input_tokens = int(tokens_used * 0.75)
+        output_tokens = tokens_used - input_tokens
+        return (
+            (input_tokens / 1_000_000) * average_input_price
+            + (output_tokens / 1_000_000) * average_output_price
+        )
 
     async def evaluate_multi_judge(self, question: str, answer: str, ground_truth: str) -> Dict[str, Any]:
-        """
-        Gọi 2 judge models và tính toán độ đồng thuận.
-        Xử lý xung đột khi 2 model lệch nhau > 1 điểm.
-        """
-        # Gọi 2 judge models song song
-        judge_a_task = asyncio.create_task(
-            asyncio.to_thread(self._simulate_judge_score, question, answer, ground_truth, self.judge_a_name)
-        )
-        judge_b_task = asyncio.create_task(
-            asyncio.to_thread(self._simulate_judge_score, question, answer, ground_truth, self.judge_b_name)
-        )
-
-        judge_a_result, judge_b_result = await asyncio.gather(judge_a_task, judge_b_task)
-
-        score_a = judge_a_result["score"]
-        score_b = judge_b_result["score"]
-
-        # Tính agreement rate
-        score_diff = abs(score_a - score_b)
-        if score_diff == 0:
-            agreement_rate = 1.0
-        elif score_diff <= 0.5:
-            agreement_rate = 0.8
-        elif score_diff <= 1.0:
-            agreement_rate = 0.5
+        if self.client is not None:
+            semantic_task = asyncio.to_thread(
+                self._call_openai_judge,
+                self.judge_a_name,
+                "semantic",
+                question,
+                answer,
+                ground_truth,
+            )
+            strict_task = asyncio.to_thread(
+                self._call_openai_judge,
+                self.judge_b_name,
+                "strict",
+                question,
+                answer,
+                ground_truth,
+            )
         else:
-            agreement_rate = 0.2
+            semantic_task = asyncio.to_thread(self._semantic_judge, question, answer, ground_truth)
+            strict_task = asyncio.to_thread(self._strict_judge, question, answer, ground_truth)
 
-        # Xử lý xung đột - final score là weighted average
-        final_score = self._resolve_conflict(score_a, score_b, agreement_rate)
+        try:
+            semantic_result, strict_result = await asyncio.gather(semantic_task, strict_task)
+            judge_mode = "openai_api" if self.client is not None else "heuristic_fallback"
+        except Exception as exc:
+            semantic_result = self._semantic_judge(question, answer, ground_truth)
+            strict_result = self._strict_judge(question, answer, ground_truth)
+            judge_mode = f"heuristic_fallback_after_api_error:{exc.__class__.__name__}"
 
-        # Tính cost
-        total_tokens = judge_a_result["tokens_used"] + judge_b_result["tokens_used"]
-        avg_cost = (total_tokens / 1_000_000) * 5.0  # Rough average cost
+        score_a = float(semantic_result["score"])
+        score_b = float(strict_result["score"])
+        agreement_rate = self._agreement_rate(score_a, score_b)
+        resolution = self._resolve_conflict(score_a, score_b)
+        tokens_used = semantic_result["tokens_used"] + strict_result["tokens_used"]
 
         return {
-            "final_score": round(final_score, 2),
+            "final_score": round(resolution["final_score"], 2),
             "agreement_rate": round(agreement_rate, 2),
             "individual_scores": {
-                self.judge_a_name: score_a,
-                self.judge_b_name: score_b
+                self.judge_a_name: round(score_a, 2),
+                self.judge_b_name: round(score_b, 2),
             },
-            "reasoning": f"Judge A: {score_a}, Judge B: {score_b}. Difference: {score_diff:.2f}. Resolution: {'consensus' if agreement_rate >= 0.5 else 'averaged'}.",
-            "tokens_used": total_tokens,
-            "estimated_cost": round(avg_cost, 6)
+            "confidence": resolution["confidence"],
+            "needs_review": resolution["needs_review"],
+            "conflict_resolution": resolution["strategy"],
+            "judge_mode": judge_mode,
+            "reasoning": (
+                f"{self.judge_a_name}: {semantic_result['reasoning']} "
+                f"{self.judge_b_name}: {strict_result['reasoning']}"
+            ),
+            "tokens_used": tokens_used,
+            "estimated_cost": round(self._estimated_cost(tokens_used), 6),
         }
 
-    def _resolve_conflict(self, score_a: float, score_b: float, agreement_rate: float) -> float:
-        """
-        Xử lý xung đột giữa 2 judges:
-        - Nếu agreement >= 0.5: dùng trung bình
-        - Nếu agreement < 0.5: dùng weighted average với bias về phía điểm cao hơn
-        """
-        if agreement_rate >= 0.5:
-            return (score_a + score_b) / 2
-        else:
-            # Khi lệch nhau nhiều, ưu tiên điểm cao hơn với weight 0.6
-            return (score_a * 0.4 + score_b * 0.6) if score_b > score_a else (score_a * 0.6 + score_b * 0.4)
-
-    async def check_position_bias(self, response_a: str, response_b: str, **_kwargs) -> Dict:
-        """
-        Kiểm tra position bias - thực hiện đổi chỗ response để xem judge có thiên vị không.
-        """
-        # Mô phỏng kiểm tra position bias
-        original_score = random.uniform(3.0, 4.5)
-        swapped_score = original_score + random.uniform(-0.3, 0.3)
-
-        bias_detected = abs(original_score - swapped_score) > 0.5
-
+    async def check_position_bias(self, response_a: str, response_b: str, **kwargs: Any) -> Dict[str, Any]:
+        question = kwargs.get("question", "Compare the two responses.")
+        ground_truth = kwargs.get("ground_truth", "")
+        first = await self.evaluate_multi_judge(question, response_a, ground_truth)
+        second = await self.evaluate_multi_judge(question, response_b, ground_truth)
+        bias_magnitude = abs(first["final_score"] - second["final_score"])
         return {
-            "original_score": round(original_score, 2),
-            "swapped_score": round(swapped_score, 2),
-            "bias_detected": bias_detected,
-            "bias_magnitude": round(abs(original_score - swapped_score), 2)
+            "original_score": first["final_score"],
+            "swapped_score": second["final_score"],
+            "bias_detected": bias_magnitude > 0.5,
+            "bias_magnitude": round(bias_magnitude, 2),
         }
 
 
 class MultiModelJudge:
-    """Wrapper class for backward compatibility with main.py"""
-    def __init__(self, judge_a: str = "gpt-4o", judge_b: str = "claude-3-5-sonnet"):
+    def __init__(self, judge_a: str = "semantic-judge", judge_b: str = "strict-judge"):
         self.judge = LLMJudge(judge_a, judge_b)
 
     async def evaluate_multi_judge(self, question: str, answer: str, ground_truth: str) -> Dict[str, Any]:

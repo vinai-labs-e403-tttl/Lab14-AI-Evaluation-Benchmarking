@@ -2,50 +2,61 @@ import asyncio
 import json
 import os
 import time
-import random
-from typing import Dict
-from engine.runner import BenchmarkRunner
-from engine.retrieval_eval import RetrievalEvaluator
-from engine.llm_judge import MultiModelJudge
+from typing import Any, Dict, List, Tuple
+
 from agent.main_agent import MainAgent, MainAgentV2
+from engine.llm_judge import MultiModelJudge
+from engine.retrieval_eval import RetrievalEvaluator
+from engine.runner import BenchmarkRunner
 
 
 class ExpertEvaluator:
-    """Wrapper để tích hợp RetrievalEvaluator với RAGAS-style scoring"""
-    def __init__(self):
+    """Adapter that exposes retrieval and RAGAS-style metrics to BenchmarkRunner."""
+
+    def __init__(self) -> None:
         self.retrieval_eval = RetrievalEvaluator()
 
-    async def score(self, test_case: Dict, agent_response: Dict, **_kwargs) -> Dict:
-        """Tính faithfulness và relevancy (RAGAS style)"""
-        import random
-        return {
-            "faithfulness": round(random.uniform(0.75, 0.95), 3),
-            "relevancy": round(random.uniform(0.70, 0.90), 3)
-        }
+    async def score(self, test_case: Dict[str, Any], agent_response: Dict[str, Any], **_kwargs: Any) -> Dict[str, Any]:
+        return await self.retrieval_eval.score(test_case, agent_response)
 
-    def evaluate_retrieval(self, expected_ids: list, retrieved_ids: list, top_k: int = 5) -> Dict:
-        """Sử dụng RetrievalEvaluator để tính hit_rate và MRR"""
+    def evaluate_retrieval(self, expected_ids: List[str], retrieved_ids: List[str], top_k: int = 5) -> Dict[str, Any]:
         return self.retrieval_eval.evaluate_retrieval(expected_ids, retrieved_ids, top_k)
 
 
-def calculate_summary(results: list, version: str) -> Dict:
-    """Tính toán summary metrics từ benchmark results"""
+def normalize_dataset(dataset: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Ensure cases have stable ids and retrieval ground-truth ids."""
+    normalized = []
+    for index, case in enumerate(dataset, start=1):
+        item = dict(case)
+        item.setdefault("id", f"case_{index:03d}")
+
+        metadata = item.get("metadata") or {}
+        if not item.get("expected_retrieval_ids"):
+            doc_id = metadata.get("doc_id") or metadata.get("source")
+            item["expected_retrieval_ids"] = [doc_id] if doc_id else []
+
+        normalized.append(item)
+    return normalized
+
+
+def calculate_summary(results: List[Dict[str, Any]], version: str) -> Dict[str, Any]:
     total = len(results)
     if total == 0:
-        return {}
+        raise ValueError("Cannot summarize an empty benchmark result set.")
 
-    # Tính các metrics tổng hợp
-    avg_score = sum(r["judge"]["final_score"] for r in results) / total
-    avg_hit_rate = sum(r["ragas"]["retrieval"]["hit_rate"] for r in results) / total
-    avg_mrr = sum(r["ragas"]["retrieval"]["mrr"] for r in results) / total
-    avg_agreement_rate = sum(r["judge"]["agreement_rate"] for r in results) / total
-    avg_latency = sum(r["latency"] for r in results) / total
-    total_tokens = sum(r.get("tokens_used", 0) for r in results)
-    total_cost = sum(r.get("estimated_cost", 0) for r in results)
-
-    # Pass/Fail stats
-    pass_count = sum(1 for r in results if r["status"] == "pass")
+    pass_count = sum(1 for result in results if result["status"] == "pass")
     fail_count = total - pass_count
+    total_agent_tokens = sum(result.get("tokens_used", 0) for result in results)
+    total_judge_tokens = sum(result.get("judge", {}).get("tokens_used", 0) for result in results)
+    total_agent_cost = sum(result.get("estimated_cost", 0.0) for result in results)
+    total_judge_cost = sum(result.get("judge", {}).get("estimated_cost", 0.0) for result in results)
+
+    avg_score = sum(result["judge"]["final_score"] for result in results) / total
+    avg_hit_rate = sum(result["ragas"]["retrieval"]["hit_rate"] for result in results) / total
+    avg_mrr = sum(result["ragas"]["retrieval"]["mrr"] for result in results) / total
+    avg_agreement = sum(result["judge"]["agreement_rate"] for result in results) / total
+    avg_latency = sum(result["latency"] for result in results) / total
+    needs_review_count = sum(1 for result in results if result["judge"].get("needs_review"))
 
     return {
         "metadata": {
@@ -53,133 +64,124 @@ def calculate_summary(results: list, version: str) -> Dict:
             "total": total,
             "pass_count": pass_count,
             "fail_count": fail_count,
-            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
+            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
         },
         "metrics": {
             "avg_score": round(avg_score, 4),
             "hit_rate": round(avg_hit_rate, 4),
             "mrr": round(avg_mrr, 4),
-            "agreement_rate": round(avg_agreement_rate, 4),
+            "agreement_rate": round(avg_agreement, 4),
             "avg_latency": round(avg_latency, 4),
-            "total_tokens": total_tokens,
-            "total_cost": round(total_cost, 6)
+            "total_tokens": total_agent_tokens + total_judge_tokens,
+            "agent_tokens": total_agent_tokens,
+            "judge_tokens": total_judge_tokens,
+            "total_cost": round(total_agent_cost + total_judge_cost, 6),
+            "agent_cost": round(total_agent_cost, 6),
+            "judge_cost": round(total_judge_cost, 6),
+            "needs_review_count": needs_review_count,
         },
         "performance": {
             "avg_latency_seconds": round(avg_latency, 4),
-            "tokens_per_case": round(total_tokens / total, 2) if total > 0 else 0,
-            "cost_per_case": round(total_cost / total, 6) if total > 0 else 0
-        }
+            "tokens_per_case": round((total_agent_tokens + total_judge_tokens) / total, 2),
+            "cost_per_case": round((total_agent_cost + total_judge_cost) / total, 6),
+        },
     }
 
 
-def run_regression_gate(v1_summary: Dict, v2_summary: Dict) -> Dict:
-    """So sánh V1 vs V2 và quyết định approve/block release"""
-    delta_score = v2_summary["metrics"]["avg_score"] - v1_summary["metrics"]["avg_score"]
-    delta_hit_rate = v2_summary["metrics"]["hit_rate"] - v1_summary["metrics"]["hit_rate"]
-    delta_latency = v1_summary["metrics"]["avg_latency"] - v2_summary["metrics"]["avg_latency"]  # Negative is worse
-    delta_cost = v1_summary["metrics"]["total_cost"] - v2_summary["metrics"]["total_cost"]  # Negative is worse (V2 costlier)
+def run_regression_gate(v1_summary: Dict[str, Any], v2_summary: Dict[str, Any]) -> Dict[str, Any]:
+    v1_metrics = v1_summary["metrics"]
+    v2_metrics = v2_summary["metrics"]
 
-    # Decision logic
-    quality_approve = delta_score >= 0 or delta_hit_rate >= 0.05
-    latency_ok = delta_latency >= -0.05  # V2 not more than 50ms slower
-    cost_ok = delta_cost >= -0.01  # V2 not more than 1 cent costlier per case
+    delta = {
+        "avg_score": round(v2_metrics["avg_score"] - v1_metrics["avg_score"], 4),
+        "hit_rate": round(v2_metrics["hit_rate"] - v1_metrics["hit_rate"], 4),
+        "mrr": round(v2_metrics["mrr"] - v1_metrics["mrr"], 4),
+        "agreement_rate": round(v2_metrics["agreement_rate"] - v1_metrics["agreement_rate"], 4),
+        "avg_latency": round(v2_metrics["avg_latency"] - v1_metrics["avg_latency"], 4),
+        "total_cost": round(v2_metrics["total_cost"] - v1_metrics["total_cost"], 6),
+    }
 
-    decision = "APPROVE" if (quality_approve and latency_ok and cost_ok) else "BLOCK RELEASE"
+    checks = {
+        "quality_not_regressed": delta["avg_score"] >= -0.1,
+        "retrieval_acceptable": v2_metrics["hit_rate"] >= 0.75 and v2_metrics["mrr"] >= 0.5,
+        "judge_reliable": v2_metrics["agreement_rate"] >= 0.7,
+        "latency_acceptable": v2_metrics["avg_latency"] <= max(v1_metrics["avg_latency"] * 1.3, v1_metrics["avg_latency"] + 0.2),
+        "cost_acceptable": v2_metrics["total_cost"] <= max(v1_metrics["total_cost"] * 1.3, v1_metrics["total_cost"] + 0.01),
+    }
+    decision = "APPROVE" if all(checks.values()) else "BLOCK_RELEASE"
+    failed = [name for name, passed in checks.items() if not passed]
 
     return {
         "decision": decision,
-        "delta_score": round(delta_score, 4),
-        "delta_hit_rate": round(delta_hit_rate, 4),
-        "delta_latency": round(delta_latency, 4),
-        "delta_cost": round(delta_cost, 4),
-        "reasons": {
-            "quality_ok": quality_approve,
-            "latency_ok": latency_ok,
-            "cost_ok": cost_ok
-        }
+        "delta": delta,
+        "checks": checks,
+        "reason": "All release checks passed." if not failed else f"Failed checks: {', '.join(failed)}.",
     }
 
 
-async def run_benchmark(agent, agent_version: str, dataset: list) -> tuple:
-    """Chạy benchmark cho một agent version"""
+async def run_benchmark(agent: Any, version: str, dataset: List[Dict[str, Any]]) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
     evaluator = ExpertEvaluator()
     judge = MultiModelJudge()
     runner = BenchmarkRunner(agent, evaluator, judge)
-
     results = await runner.run_all(dataset, batch_size=10)
-    summary = calculate_summary(results, agent_version)
-
-    return results, summary
+    return results, calculate_summary(results, version)
 
 
-async def main():
-    print("🚀 Khởi động Benchmark cho Lab14 AI Evaluation...")
+def load_dataset(path: str = "data/golden_set.jsonl") -> List[Dict[str, Any]]:
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"Missing {path}. Run python data/synthetic_gen.py first.")
 
-    # Load dataset
-    if not os.path.exists("data/golden_set.jsonl"):
-        print("❌ Thiếu data/golden_set.jsonl. Hãy chạy 'python data/synthetic_gen.py' trước.")
-        return
-
-    with open("data/golden_set.jsonl", "r", encoding="utf-8") as f:
-        dataset = [json.loads(line) for line in f if line.strip()]
+    with open(path, "r", encoding="utf-8") as file:
+        dataset = [json.loads(line) for line in file if line.strip()]
 
     if not dataset:
-        print("❌ File data/golden_set.jsonl rỗng.")
-        return
+        raise ValueError(f"{path} is empty.")
+    return normalize_dataset(dataset)
 
-    print(f"📊 Loaded {len(dataset)} test cases")
 
-    # Ensure dataset has ids
-    for i, case in enumerate(dataset):
-        if "id" not in case:
-            case["id"] = f"case_{i+1:03d}"
-        # Add expected_retrieval_ids if not present (for simulation)
-        if "expected_retrieval_ids" not in case:
-            case["expected_retrieval_ids"] = [f"doc_{random.randint(0, 49):03d}" for _ in range(2)]
+async def main() -> None:
+    print("Starting Lab14 benchmark...")
+    dataset = load_dataset()
+    print(f"Loaded {len(dataset)} test cases.")
 
-    # Benchmark V1
-    print("\n--- Benchmark V1 (Base Agent) ---")
-    v1_results, v1_summary = await run_benchmark(MainAgent(), "Agent_V1_Base", dataset)
-    print(f"V1: Score={v1_summary['metrics']['avg_score']:.4f}, Hit Rate={v1_summary['metrics']['hit_rate']:.4f}, Latency={v1_summary['metrics']['avg_latency']:.4f}s")
-    _ = v1_results  # Used in regression analysis
+    print("Running V1 benchmark...")
+    _v1_results, v1_summary = await run_benchmark(MainAgent(), "Agent_V1_Base", dataset)
+    print(
+        "V1: "
+        f"score={v1_summary['metrics']['avg_score']:.4f}, "
+        f"hit_rate={v1_summary['metrics']['hit_rate']:.4f}, "
+        f"mrr={v1_summary['metrics']['mrr']:.4f}, "
+        f"latency={v1_summary['metrics']['avg_latency']:.4f}s"
+    )
 
-    # Benchmark V2
-    print("\n--- Benchmark V2 (Optimized Agent) ---")
+    print("Running V2 benchmark...")
     v2_results, v2_summary = await run_benchmark(MainAgentV2(), "Agent_V2_Optimized", dataset)
-    print(f"V2: Score={v2_summary['metrics']['avg_score']:.4f}, Hit Rate={v2_summary['metrics']['hit_rate']:.4f}, Latency={v2_summary['metrics']['avg_latency']:.4f}s")
+    print(
+        "V2: "
+        f"score={v2_summary['metrics']['avg_score']:.4f}, "
+        f"hit_rate={v2_summary['metrics']['hit_rate']:.4f}, "
+        f"mrr={v2_summary['metrics']['mrr']:.4f}, "
+        f"latency={v2_summary['metrics']['avg_latency']:.4f}s"
+    )
 
-    # Regression Analysis
-    print("\n📊 --- REGRESSION ANALYSIS (V1 vs V2) ---")
-    regression = run_regression_gate(v1_summary, v2_summary)
-    print(f"Decision: {regression['decision']}")
-    print(f"  Delta Score: {'+' if regression['delta_score'] >= 0 else ''}{regression['delta_score']:.4f}")
-    print(f"  Delta Hit Rate: {'+' if regression['delta_hit_rate'] >= 0 else ''}{regression['delta_hit_rate']:.4f}")
-    print(f"  Delta Latency: {'+' if regression['delta_latency'] >= 0 else ''}{regression['delta_latency']:.4f}s")
+    release_gate = run_regression_gate(v1_summary, v2_summary)
+    print(f"Release decision: {release_gate['decision']}")
+    print(f"Reason: {release_gate['reason']}")
 
-    # Save reports
-    os.makedirs("reports", exist_ok=True)
-
-    # V2 summary with regression info
     final_summary = {
         **v2_summary,
-        "regression": regression,
-        "v1_metrics": v1_summary["metrics"]
+        "release_gate": release_gate,
+        "regression": release_gate,
+        "v1_metrics": v1_summary["metrics"],
     }
 
-    with open("reports/summary.json", "w", encoding="utf-8") as f:
-        json.dump(final_summary, f, ensure_ascii=False, indent=2)
+    os.makedirs("reports", exist_ok=True)
+    with open("reports/summary.json", "w", encoding="utf-8") as file:
+        json.dump(final_summary, file, ensure_ascii=False, indent=2)
+    with open("reports/benchmark_results.json", "w", encoding="utf-8") as file:
+        json.dump(v2_results, file, ensure_ascii=False, indent=2)
 
-    with open("reports/benchmark_results.json", "w", encoding="utf-8") as f:
-        json.dump(v2_results, f, ensure_ascii=False, indent=2)
-
-    print(f"\n✅ Reports saved to reports/")
-    print(f"   - summary.json")
-    print(f"   - benchmark_results.json")
-
-    if regression["decision"] == "APPROVE":
-        print("\n✅ QUYẾT ĐỊNH: CHẤP NHẬN BẢN CẬP NHẬT (APPROVE)")
-    else:
-        print("\n❌ QUYẾT ĐỊNH: TỪ CHỐI (BLOCK RELEASE)")
+    print("Reports saved to reports/summary.json and reports/benchmark_results.json.")
 
 
 if __name__ == "__main__":
