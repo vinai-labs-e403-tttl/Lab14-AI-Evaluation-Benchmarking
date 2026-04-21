@@ -32,7 +32,9 @@ def build_client() -> OpenAI:
     return OpenAI()
 
 
-def generate_question_pairs(client: OpenAI, document: str, metadata: Dict) -> List[Dict]:
+def generate_question_pairs(
+    client: OpenAI, document: str, metadata: Dict, doc_id: str
+) -> List[Dict]:
     section = metadata.get("section") or metadata.get("source") or "tài liệu này"
     model = os.getenv("OPENAI_MODEL", DEFAULT_MODEL)
     response = client.responses.create(
@@ -123,6 +125,7 @@ def generate_question_pairs(client: OpenAI, document: str, metadata: Dict) -> Li
                 "context": context,
                 "metadata": {
                     **metadata,
+                    "doc_id": doc_id,
                     "difficulty": item["difficulty"],
                     "type": item["type"],
                 },
@@ -138,10 +141,14 @@ def main() -> None:
     results = collection.get(include=["documents", "metadatas"])
 
     rows: List[Dict] = []
-    for document, metadata in zip(results["documents"], results["metadatas"]):
+    for doc_id, document, metadata in zip(
+        results["ids"], results["documents"], results["metadatas"]
+    ):
         if not document:
             continue
-        rows.extend(generate_question_pairs(openai_client, document, metadata or {}))
+        rows.extend(
+            generate_question_pairs(openai_client, document, metadata or {}, doc_id)
+        )
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with OUTPUT_PATH.open("w", encoding="utf-8") as f:
