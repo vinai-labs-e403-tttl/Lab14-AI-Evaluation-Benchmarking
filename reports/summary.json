@@ -4,14 +4,14 @@
     "total": 58,
     "pass_count": 31,
     "fail_count": 27,
-    "timestamp": "2026-04-21 09:51:39"
+    "timestamp": "2026-04-21 19:04:43"
   },
   "metrics": {
     "avg_score": 3.181,
     "hit_rate": 0.9138,
     "mrr": 0.8233,
     "agreement_rate": 0.9698,
-    "avg_latency": 0.1199,
+    "avg_latency": 0.1457,
     "total_tokens": 41196,
     "agent_tokens": 16818,
     "judge_tokens": 24378,
@@ -21,7 +21,7 @@
     "needs_review_count": 0
   },
   "performance": {
-    "avg_latency_seconds": 0.1199,
+    "avg_latency_seconds": 0.1457,
     "tokens_per_case": 710.28,
     "cost_per_case": 0.000163
   },
@@ -32,7 +32,7 @@
       "hit_rate": 0.0345,
       "mrr": 0.013,
       "agreement_rate": 0.0,
-      "avg_latency": 0.0176,
+      "avg_latency": 0.0352,
       "total_cost": -2.6e-05
     },
     "checks": {
@@ -51,7 +51,7 @@
       "hit_rate": 0.0345,
       "mrr": 0.013,
       "agreement_rate": 0.0,
-      "avg_latency": 0.0176,
+      "avg_latency": 0.0352,
       "total_cost": -2.6e-05
     },
     "checks": {
@@ -68,7 +68,7 @@
     "hit_rate": 0.8793,
     "mrr": 0.8103,
     "agreement_rate": 0.9698,
-    "avg_latency": 0.1023,
+    "avg_latency": 0.1105,
     "total_tokens": 41386,
     "agent_tokens": 17022,
     "judge_tokens": 24364,

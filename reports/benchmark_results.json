@@ -13,12 +13,12 @@
     "expected_retrieval_ids": [
       "access_control_sop_0"
     ],
-    "latency": 0.141,
+    "latency": 0.1755,
     "tokens_used": 279,
     "estimated_cost": 5.1e-05,
     "ragas": {
-      "faithfulness": 0.868,
-      "relevancy": 0.836,
+      "faithfulness": 0.75,
+      "relevancy": 0.821,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -66,12 +66,12 @@
     "expected_retrieval_ids": [
       "access_control_sop_0"
     ],
-    "latency": 0.1406,
+    "latency": 0.1286,
     "tokens_used": 208,
     "estimated_cost": 4.1e-05,
     "ragas": {
-      "faithfulness": 0.935,
-      "relevancy": 0.761,
+      "faithfulness": 0.928,
+      "relevancy": 0.833,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -119,12 +119,12 @@
     "expected_retrieval_ids": [
       "access_control_sop_1"
     ],
-    "latency": 0.1049,
+    "latency": 0.129,
     "tokens_used": 298,
     "estimated_cost": 5.3e-05,
     "ragas": {
-      "faithfulness": 0.915,
-      "relevancy": 0.731,
+      "faithfulness": 0.86,
+      "relevancy": 0.839,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 0.5,
@@ -172,12 +172,12 @@
     "expected_retrieval_ids": [
       "access_control_sop_1"
     ],
-    "latency": 0.1529,
+    "latency": 0.1757,
     "tokens_used": 333,
     "estimated_cost": 5.7e-05,
     "ragas": {
-      "faithfulness": 0.895,
-      "relevancy": 0.897,
+      "faithfulness": 0.918,
+      "relevancy": 0.783,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -225,12 +225,12 @@
     "expected_retrieval_ids": [
       "access_control_sop_2"
     ],
-    "latency": 0.1404,
+    "latency": 0.1445,
     "tokens_used": 228,
     "estimated_cost": 4.2e-05,
     "ragas": {
-      "faithfulness": 0.913,
-      "relevancy": 0.739,
+      "faithfulness": 0.844,
+      "relevancy": 0.898,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -278,12 +278,12 @@
     "expected_retrieval_ids": [
       "access_control_sop_2"
     ],
-    "latency": 0.104,
+    "latency": 0.175,
     "tokens_used": 237,
     "estimated_cost": 4.1e-05,
     "ragas": {
-      "faithfulness": 0.82,
-      "relevancy": 0.886,
+      "faithfulness": 0.769,
+      "relevancy": 0.813,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 0.5,
@@ -331,12 +331,12 @@
     "expected_retrieval_ids": [
       "access_control_sop_3"
     ],
-    "latency": 0.1416,
+    "latency": 0.1279,
     "tokens_used": 277,
     "estimated_cost": 5.2e-05,
     "ragas": {
-      "faithfulness": 0.935,
-      "relevancy": 0.813,
+      "faithfulness": 0.894,
+      "relevancy": 0.899,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -384,12 +384,12 @@
     "expected_retrieval_ids": [
       "access_control_sop_3"
     ],
-    "latency": 0.1184,
+    "latency": 0.1435,
     "tokens_used": 382,
     "estimated_cost": 6.8e-05,
     "ragas": {
-      "faithfulness": 0.924,
-      "relevancy": 0.82,
+      "faithfulness": 0.875,
+      "relevancy": 0.869,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -437,12 +437,12 @@
     "expected_retrieval_ids": [
       "access_control_sop_4"
     ],
-    "latency": 0.1584,
+    "latency": 0.1123,
     "tokens_used": 271,
     "estimated_cost": 5.1e-05,
     "ragas": {
-      "faithfulness": 0.883,
-      "relevancy": 0.746,
+      "faithfulness": 0.751,
+      "relevancy": 0.876,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -490,12 +490,12 @@
     "expected_retrieval_ids": [
       "access_control_sop_4"
     ],
-    "latency": 0.1413,
+    "latency": 0.1282,
     "tokens_used": 240,
     "estimated_cost": 4.7e-05,
     "ragas": {
-      "faithfulness": 0.839,
-      "relevancy": 0.855,
+      "faithfulness": 0.769,
+      "relevancy": 0.738,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -543,12 +543,12 @@
     "expected_retrieval_ids": [
       "access_control_sop_5"
     ],
-    "latency": 0.0952,
+    "latency": 0.169,
     "tokens_used": 200,
     "estimated_cost": 3.5e-05,
     "ragas": {
-      "faithfulness": 0.883,
-      "relevancy": 0.874,
+      "faithfulness": 0.768,
+      "relevancy": 0.852,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -596,12 +596,12 @@
     "expected_retrieval_ids": [
       "access_control_sop_5"
     ],
-    "latency": 0.1457,
+    "latency": 0.1534,
     "tokens_used": 285,
     "estimated_cost": 5e-05,
     "ragas": {
-      "faithfulness": 0.832,
-      "relevancy": 0.852,
+      "faithfulness": 0.892,
+      "relevancy": 0.801,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -649,12 +649,12 @@
     "expected_retrieval_ids": [
       "access_control_sop_6"
     ],
-    "latency": 0.1013,
+    "latency": 0.1993,
     "tokens_used": 259,
     "estimated_cost": 4.4e-05,
     "ragas": {
-      "faithfulness": 0.806,
-      "relevancy": 0.873,
+      "faithfulness": 0.827,
+      "relevancy": 0.753,
       "retrieval": {
         "hit_rate": 0.0,
         "mrr": 0.0,
@@ -702,12 +702,12 @@
     "expected_retrieval_ids": [
       "access_control_sop_6"
     ],
-    "latency": 0.1263,
+    "latency": 0.1219,
     "tokens_used": 267,
     "estimated_cost": 5e-05,
     "ragas": {
-      "faithfulness": 0.783,
-      "relevancy": 0.83,
+      "faithfulness": 0.795,
+      "relevancy": 0.818,
       "retrieval": {
         "hit_rate": 0.0,
         "mrr": 0.0,
@@ -755,12 +755,12 @@
     "expected_retrieval_ids": [
       "it_helpdesk_faq_0"
     ],
-    "latency": 0.126,
+    "latency": 0.1538,
     "tokens_used": 302,
     "estimated_cost": 4.9e-05,
     "ragas": {
-      "faithfulness": 0.884,
-      "relevancy": 0.743,
+      "faithfulness": 0.768,
+      "relevancy": 0.711,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -808,12 +808,12 @@
     "expected_retrieval_ids": [
       "it_helpdesk_faq_0"
     ],
-    "latency": 0.15,
+    "latency": 0.1694,
     "tokens_used": 317,
     "estimated_cost": 5.3e-05,
     "ragas": {
-      "faithfulness": 0.828,
-      "relevancy": 0.895,
+      "faithfulness": 0.837,
+      "relevancy": 0.736,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -861,12 +861,12 @@
     "expected_retrieval_ids": [
       "it_helpdesk_faq_1"
     ],
-    "latency": 0.1202,
+    "latency": 0.1698,
     "tokens_used": 249,
     "estimated_cost": 4.1e-05,
     "ragas": {
-      "faithfulness": 0.755,
-      "relevancy": 0.754,
+      "faithfulness": 0.899,
+      "relevancy": 0.755,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -914,12 +914,12 @@
     "expected_retrieval_ids": [
       "it_helpdesk_faq_1"
     ],
-    "latency": 0.0948,
+    "latency": 0.1224,
     "tokens_used": 333,
     "estimated_cost": 5.5e-05,
     "ragas": {
-      "faithfulness": 0.828,
-      "relevancy": 0.777,
+      "faithfulness": 0.909,
+      "relevancy": 0.793,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -967,12 +967,12 @@
     "expected_retrieval_ids": [
       "it_helpdesk_faq_2"
     ],
-    "latency": 0.1193,
+    "latency": 0.153,
     "tokens_used": 344,
     "estimated_cost": 5.6e-05,
     "ragas": {
-      "faithfulness": 0.795,
-      "relevancy": 0.713,
+      "faithfulness": 0.888,
+      "relevancy": 0.784,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -1020,12 +1020,12 @@
     "expected_retrieval_ids": [
       "it_helpdesk_faq_2"
     ],
-    "latency": 0.1137,
+    "latency": 0.1685,
     "tokens_used": 377,
     "estimated_cost": 6.2e-05,
     "ragas": {
-      "faithfulness": 0.799,
-      "relevancy": 0.739,
+      "faithfulness": 0.754,
+      "relevancy": 0.852,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -1073,12 +1073,12 @@
     "expected_retrieval_ids": [
       "it_helpdesk_faq_3"
     ],
-    "latency": 0.1049,
+    "latency": 0.0834,
     "tokens_used": 205,
     "estimated_cost": 3.6e-05,
     "ragas": {
-      "faithfulness": 0.925,
-      "relevancy": 0.706,
+      "faithfulness": 0.927,
+      "relevancy": 0.818,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -1126,12 +1126,12 @@
     "expected_retrieval_ids": [
       "it_helpdesk_faq_3"
     ],
-    "latency": 0.121,
+    "latency": 0.1232,
     "tokens_used": 271,
     "estimated_cost": 4.6e-05,
     "ragas": {
-      "faithfulness": 0.86,
-      "relevancy": 0.755,
+      "faithfulness": 0.759,
+      "relevancy": 0.814,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -1179,12 +1179,12 @@
     "expected_retrieval_ids": [
       "it_helpdesk_faq_4"
     ],
-    "latency": 0.1038,
+    "latency": 0.1541,
     "tokens_used": 184,
     "estimated_cost": 3.1e-05,
     "ragas": {
-      "faithfulness": 0.79,
-      "relevancy": 0.719,
+      "faithfulness": 0.911,
+      "relevancy": 0.717,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -1232,12 +1232,12 @@
     "expected_retrieval_ids": [
       "it_helpdesk_faq_4"
     ],
-    "latency": 0.0979,
+    "latency": 0.1698,
     "tokens_used": 261,
     "estimated_cost": 4.4e-05,
     "ragas": {
-      "faithfulness": 0.875,
-      "relevancy": 0.769,
+      "faithfulness": 0.894,
+      "relevancy": 0.826,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -1285,12 +1285,12 @@
     "expected_retrieval_ids": [
       "it_helpdesk_faq_5"
     ],
-    "latency": 0.1165,
+    "latency": 0.1075,
     "tokens_used": 278,
     "estimated_cost": 5.7e-05,
     "ragas": {
-      "faithfulness": 0.877,
-      "relevancy": 0.76,
+      "faithfulness": 0.789,
+      "relevancy": 0.877,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -1338,12 +1338,12 @@
     "expected_retrieval_ids": [
       "it_helpdesk_faq_5"
     ],
-    "latency": 0.0972,
+    "latency": 0.1551,
     "tokens_used": 241,
     "estimated_cost": 4.4e-05,
     "ragas": {
-      "faithfulness": 0.941,
-      "relevancy": 0.867,
+      "faithfulness": 0.875,
+      "relevancy": 0.719,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -1391,12 +1391,12 @@
     "expected_retrieval_ids": [
       "policy_refund_v4_0"
     ],
-    "latency": 0.0891,
+    "latency": 0.1851,
     "tokens_used": 218,
     "estimated_cost": 4.4e-05,
     "ragas": {
-      "faithfulness": 0.854,
-      "relevancy": 0.789,
+      "faithfulness": 0.899,
+      "relevancy": 0.81,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -1444,12 +1444,12 @@
     "expected_retrieval_ids": [
       "policy_refund_v4_0"
     ],
-    "latency": 0.137,
+    "latency": 0.083,
     "tokens_used": 221,
     "estimated_cost": 4.3e-05,
     "ragas": {
-      "faithfulness": 0.89,
-      "relevancy": 0.779,
+      "faithfulness": 0.792,
+      "relevancy": 0.757,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -1497,12 +1497,12 @@
     "expected_retrieval_ids": [
       "policy_refund_v4_1"
     ],
-    "latency": 0.1456,
+    "latency": 0.1547,
     "tokens_used": 282,
     "estimated_cost": 5.4e-05,
     "ragas": {
-      "faithfulness": 0.792,
-      "relevancy": 0.762,
+      "faithfulness": 0.839,
+      "relevancy": 0.854,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -1550,12 +1550,12 @@
     "expected_retrieval_ids": [
       "policy_refund_v4_1"
     ],
-    "latency": 0.1367,
+    "latency": 0.1237,
     "tokens_used": 329,
     "estimated_cost": 6.4e-05,
     "ragas": {
-      "faithfulness": 0.885,
-      "relevancy": 0.82,
+      "faithfulness": 0.765,
+      "relevancy": 0.881,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -1603,12 +1603,12 @@
     "expected_retrieval_ids": [
       "policy_refund_v4_2"
     ],
-    "latency": 0.1106,
+    "latency": 0.1254,
     "tokens_used": 259,
     "estimated_cost": 5e-05,
     "ragas": {
-      "faithfulness": 0.922,
-      "relevancy": 0.77,
+      "faithfulness": 0.806,
+      "relevancy": 0.782,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 0.5,
@@ -1656,12 +1656,12 @@
     "expected_retrieval_ids": [
       "policy_refund_v4_2"
     ],
-    "latency": 0.1494,
+    "latency": 0.125,
     "tokens_used": 217,
     "estimated_cost": 4.4e-05,
     "ragas": {
-      "faithfulness": 0.938,
-      "relevancy": 0.77,
+      "faithfulness": 0.918,
+      "relevancy": 0.804,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -1709,12 +1709,12 @@
     "expected_retrieval_ids": [
       "policy_refund_v4_3"
     ],
-    "latency": 0.1022,
+    "latency": 0.127,
     "tokens_used": 251,
     "estimated_cost": 5.3e-05,
     "ragas": {
       "faithfulness": 0.948,
-      "relevancy": 0.78,
+      "relevancy": 0.727,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 0.3333333333333333,
@@ -1762,12 +1762,12 @@
     "expected_retrieval_ids": [
       "policy_refund_v4_3"
     ],
-    "latency": 0.1016,
+    "latency": 0.154,
     "tokens_used": 453,
     "estimated_cost": 7.7e-05,
     "ragas": {
-      "faithfulness": 0.752,
-      "relevancy": 0.887,
+      "faithfulness": 0.798,
+      "relevancy": 0.881,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -1815,12 +1815,12 @@
     "expected_retrieval_ids": [
       "policy_refund_v4_4"
     ],
-    "latency": 0.1317,
+    "latency": 0.1544,
     "tokens_used": 268,
     "estimated_cost": 5e-05,
     "ragas": {
-      "faithfulness": 0.939,
-      "relevancy": 0.88,
+      "faithfulness": 0.945,
+      "relevancy": 0.741,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -1868,12 +1868,12 @@
     "expected_retrieval_ids": [
       "policy_refund_v4_4"
     ],
-    "latency": 0.086,
+    "latency": 0.1847,
     "tokens_used": 295,
     "estimated_cost": 5.9e-05,
     "ragas": {
-      "faithfulness": 0.804,
-      "relevancy": 0.852,
+      "faithfulness": 0.867,
+      "relevancy": 0.707,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -1921,12 +1921,12 @@
     "expected_retrieval_ids": [
       "policy_refund_v4_5"
     ],
-    "latency": 0.1372,
+    "latency": 0.1382,
     "tokens_used": 239,
     "estimated_cost": 4.3e-05,
     "ragas": {
-      "faithfulness": 0.912,
-      "relevancy": 0.897,
+      "faithfulness": 0.831,
+      "relevancy": 0.883,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 0.3333333333333333,
@@ -1974,12 +1974,12 @@
     "expected_retrieval_ids": [
       "policy_refund_v4_5"
     ],
-    "latency": 0.1243,
+    "latency": 0.1388,
     "tokens_used": 352,
     "estimated_cost": 6.2e-05,
     "ragas": {
-      "faithfulness": 0.855,
-      "relevancy": 0.719,
+      "faithfulness": 0.886,
+      "relevancy": 0.768,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 0.25,
@@ -2027,12 +2027,12 @@
     "expected_retrieval_ids": [
       "hr_leave_policy_0"
     ],
-    "latency": 0.0981,
+    "latency": 0.1853,
     "tokens_used": 362,
     "estimated_cost": 6.5e-05,
     "ragas": {
-      "faithfulness": 0.787,
-      "relevancy": 0.714,
+      "faithfulness": 0.939,
+      "relevancy": 0.803,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -2080,12 +2080,12 @@
     "expected_retrieval_ids": [
       "hr_leave_policy_0"
     ],
-    "latency": 0.1238,
+    "latency": 0.1245,
     "tokens_used": 392,
     "estimated_cost": 6.6e-05,
     "ragas": {
-      "faithfulness": 0.842,
-      "relevancy": 0.852,
+      "faithfulness": 0.931,
+      "relevancy": 0.706,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -2133,12 +2133,12 @@
     "expected_retrieval_ids": [
       "hr_leave_policy_1"
     ],
-    "latency": 0.112,
+    "latency": 0.1839,
     "tokens_used": 396,
     "estimated_cost": 7.4e-05,
     "ragas": {
-      "faithfulness": 0.817,
-      "relevancy": 0.871,
+      "faithfulness": 0.93,
+      "relevancy": 0.741,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -2186,12 +2186,12 @@
     "expected_retrieval_ids": [
       "hr_leave_policy_1"
     ],
-    "latency": 0.1102,
+    "latency": 0.1535,
     "tokens_used": 253,
     "estimated_cost": 5e-05,
     "ragas": {
-      "faithfulness": 0.76,
-      "relevancy": 0.81,
+      "faithfulness": 0.924,
+      "relevancy": 0.76,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -2239,12 +2239,12 @@
     "expected_retrieval_ids": [
       "hr_leave_policy_2"
     ],
-    "latency": 0.1267,
+    "latency": 0.1365,
     "tokens_used": 223,
     "estimated_cost": 4.3e-05,
     "ragas": {
       "faithfulness": 0.849,
-      "relevancy": 0.803,
+      "relevancy": 0.885,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 0.5,
@@ -2292,12 +2292,12 @@
     "expected_retrieval_ids": [
       "hr_leave_policy_2"
     ],
-    "latency": 0.0885,
+    "latency": 0.1523,
     "tokens_used": 350,
     "estimated_cost": 6e-05,
     "ragas": {
-      "faithfulness": 0.762,
-      "relevancy": 0.876,
+      "faithfulness": 0.835,
+      "relevancy": 0.774,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -2345,12 +2345,12 @@
     "expected_retrieval_ids": [
       "hr_leave_policy_3"
     ],
-    "latency": 0.1105,
+    "latency": 0.168,
     "tokens_used": 425,
     "estimated_cost": 7.4e-05,
     "ragas": {
-      "faithfulness": 0.777,
-      "relevancy": 0.869,
+      "faithfulness": 0.781,
+      "relevancy": 0.786,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -2398,12 +2398,12 @@
     "expected_retrieval_ids": [
       "hr_leave_policy_3"
     ],
-    "latency": 0.1234,
+    "latency": 0.1368,
     "tokens_used": 251,
     "estimated_cost": 4.8e-05,
     "ragas": {
-      "faithfulness": 0.879,
-      "relevancy": 0.736,
+      "faithfulness": 0.793,
+      "relevancy": 0.852,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -2451,12 +2451,12 @@
     "expected_retrieval_ids": [
       "hr_leave_policy_4"
     ],
-    "latency": 0.0886,
+    "latency": 0.1674,
     "tokens_used": 247,
     "estimated_cost": 4.5e-05,
     "ragas": {
-      "faithfulness": 0.816,
-      "relevancy": 0.874,
+      "faithfulness": 0.784,
+      "relevancy": 0.71,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 0.3333333333333333,
@@ -2504,12 +2504,12 @@
     "expected_retrieval_ids": [
       "hr_leave_policy_4"
     ],
-    "latency": 0.1567,
+    "latency": 0.154,
     "tokens_used": 355,
     "estimated_cost": 6.3e-05,
     "ragas": {
-      "faithfulness": 0.862,
-      "relevancy": 0.9,
+      "faithfulness": 0.876,
+      "relevancy": 0.814,
       "retrieval": {
         "hit_rate": 0.0,
         "mrr": 0.0,
@@ -2557,12 +2557,12 @@
     "expected_retrieval_ids": [
       "sla_p1_2026_0"
     ],
-    "latency": 0.088,
+    "latency": 0.183,
     "tokens_used": 330,
     "estimated_cost": 6.1e-05,
     "ragas": {
-      "faithfulness": 0.946,
-      "relevancy": 0.84,
+      "faithfulness": 0.776,
+      "relevancy": 0.724,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -2610,12 +2610,12 @@
     "expected_retrieval_ids": [
       "sla_p1_2026_0"
     ],
-    "latency": 0.1033,
+    "latency": 0.1527,
     "tokens_used": 272,
     "estimated_cost": 5e-05,
     "ragas": {
-      "faithfulness": 0.813,
-      "relevancy": 0.886,
+      "faithfulness": 0.893,
+      "relevancy": 0.834,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -2663,12 +2663,12 @@
     "expected_retrieval_ids": [
       "sla_p1_2026_1"
     ],
-    "latency": 0.0811,
+    "latency": 0.1366,
     "tokens_used": 421,
     "estimated_cost": 7.2e-05,
     "ragas": {
-      "faithfulness": 0.929,
-      "relevancy": 0.87,
+      "faithfulness": 0.87,
+      "relevancy": 0.838,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -2716,12 +2716,12 @@
     "expected_retrieval_ids": [
       "sla_p1_2026_1"
     ],
-    "latency": 0.149,
+    "latency": 0.1674,
     "tokens_used": 301,
     "estimated_cost": 5e-05,
     "ragas": {
-      "faithfulness": 0.786,
-      "relevancy": 0.711,
+      "faithfulness": 0.914,
+      "relevancy": 0.83,
       "retrieval": {
         "hit_rate": 0.0,
         "mrr": 0.0,
@@ -2769,12 +2769,12 @@
     "expected_retrieval_ids": [
       "sla_p1_2026_2"
     ],
-    "latency": 0.1089,
+    "latency": 0.1052,
     "tokens_used": 279,
     "estimated_cost": 5.2e-05,
     "ragas": {
-      "faithfulness": 0.903,
-      "relevancy": 0.703,
+      "faithfulness": 0.845,
+      "relevancy": 0.876,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -2822,12 +2822,12 @@
     "expected_retrieval_ids": [
       "sla_p1_2026_2"
     ],
-    "latency": 0.1422,
+    "latency": 0.137,
     "tokens_used": 348,
     "estimated_cost": 5.9e-05,
     "ragas": {
-      "faithfulness": 0.831,
-      "relevancy": 0.723,
+      "faithfulness": 0.777,
+      "relevancy": 0.799,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -2875,12 +2875,12 @@
     "expected_retrieval_ids": [
       "sla_p1_2026_3"
     ],
-    "latency": 0.1244,
+    "latency": 0.1676,
     "tokens_used": 316,
     "estimated_cost": 5.1e-05,
     "ragas": {
-      "faithfulness": 0.852,
-      "relevancy": 0.773,
+      "faithfulness": 0.814,
+      "relevancy": 0.824,
       "retrieval": {
         "hit_rate": 0.0,
         "mrr": 0.0,
@@ -2928,12 +2928,12 @@
     "expected_retrieval_ids": [
       "sla_p1_2026_3"
     ],
-    "latency": 0.1454,
+    "latency": 0.1207,
     "tokens_used": 281,
     "estimated_cost": 5.9e-05,
     "ragas": {
-      "faithfulness": 0.832,
-      "relevancy": 0.845,
+      "faithfulness": 0.788,
+      "relevancy": 0.736,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,
@@ -2981,12 +2981,12 @@
     "expected_retrieval_ids": [
       "sla_p1_2026_4"
     ],
-    "latency": 0.1462,
+    "latency": 0.1053,
     "tokens_used": 215,
     "estimated_cost": 4.2e-05,
     "ragas": {
-      "faithfulness": 0.827,
-      "relevancy": 0.736,
+      "faithfulness": 0.766,
+      "relevancy": 0.855,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 0.5,
@@ -3034,12 +3034,12 @@
     "expected_retrieval_ids": [
       "sla_p1_2026_4"
     ],
-    "latency": 0.0997,
+    "latency": 0.1056,
     "tokens_used": 291,
     "estimated_cost": 5.1e-05,
     "ragas": {
-      "faithfulness": 0.891,
-      "relevancy": 0.745,
+      "faithfulness": 0.937,
+      "relevancy": 0.795,
       "retrieval": {
         "hit_rate": 1.0,
         "mrr": 1.0,

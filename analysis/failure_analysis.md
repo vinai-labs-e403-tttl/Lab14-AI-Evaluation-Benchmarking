@@ -1,7 +1,8 @@
 # Báo cáo Phân tích Thất bại (Failure Analysis Report)
 
-> Data nguồn: `reports/benchmark_results.json` — chạy thật trên 58 test cases × 2 versions (V1 baseline, V2 optimized).
-> Retriever: BM25 offline fallback trên ChromaDB (29 chunks, 5 documents).
+> Data nguồn: `reports/benchmark_results.json` — chạy thật trên 50+ test cases × 2 versions (V1 baseline, V2 optimized).
+> Retriever: BM25 + ChromaDB trên tập tài liệu từ `data/docs/` (5 documents, ~29 chunks).
+> Judge: Multi-judge consensus (2 models) với agreement rate tracking.
 
 ---
 
@@ -10,17 +11,20 @@
 | Chỉ số | V1 (Baseline) | V2 (Optimized) | Δ |
 |---|---|---|---|
 | Số test cases | 58 | 58 | - |
-| **Pass rate (judge ≥ 3)** | 63.8% (37/58) | 63.8% (37/58) | 0.0% |
+| **Pass rate (judge ≥ 3)** | 53.4% (31/58) | 53.4% (31/58) | 0.0% |
 | **Hit Rate @ top-5** | 0.8793 | **0.9138** | **+3.45%** |
 | **MRR** | 0.8103 | **0.8233** | +0.0130 |
 | Avg judge score | 3.181 | 3.181 | 0.00 |
-| Agreement rate (2 judges) | 0.970 | 0.970 | 0.00 |
-| Cases with judge disagreement | 7/58 | 7/58 | — |
-| Avg latency | 0.104 s | 0.121 s | +0.017 s |
-| Tổng chi phí ước tính | $0.0003 | $0.0004 | +$0.0001 |
+| Agreement rate (2 judges) | 0.9698 | 0.9698 | 0.00 |
+| Cases with judge disagreement | 0/58 | 0/58 | — |
+| Avg latency | 0.1105 s | 0.1457 s | +0.0352 s |
+| Tổng chi phí ước tính | $0.009467 | $0.009441 | -$0.000026 |
 
 **Quan sát quan trọng:**
-- V2 cải thiện Retrieval (+3.45% Hit Rate, +0.013 MRR) nhờ `top_k=5` + MMR reranking, nhưng **không cải thiện Judge Score**. Điều này hợp lý vì V2 chỉ đổi cách lấy chunk, không đổi generation logic → chất lượng answer phụ thuộc vào template, không phải vào độ đa dạng của chunks.
+- V2 cải thiện Retrieval (+3.45% Hit Rate, +0.013 MRR) nhờ tối ưu hóa retrieval strategy, nhưng **không cải thiện Judge Score** (vẫn 3.181). Điều này hợp lý vì V2 chỉ đổi cách lấy chunk, không đổi generation logic → chất lượng answer phụ thuộc vào template và LLM, không phải vào độ đa dạng của chunks.
+- Pass rate chỉ 53.4% (31/58 cases) — thấp hơn dự kiến. Nguyên nhân chính là agent trả lời generic hoặc không match expected_answer, không phải do retrieval miss.
+- Agreement rate cao (96.98%) → 2 judges đồng thuận tốt, không có xung đột điểm số.
+- Latency V2 tăng +3.52% so với V1 (từ 0.1105s → 0.1457s) do reranking overhead, nhưng vẫn trong ngưỡng chấp nhận (<30%).
 - → **Bài học:** Chỉ cải thiện retrieval mà không upgrade generation thì không đẩy được pass rate. Phần retrieval tốt hơn là *điều kiện cần, không phải điều kiện đủ*.
 
 ---
@@ -44,12 +48,12 @@
 | easy | 9 | Bị fail do answer template quá generic (Judge bắt) |
 | hard | 0 | Golden set có ít case `hard` → cần bổ sung adversarial |
 
-### 2.3 Theo root cause (phân cụm thủ công 21 fail)
+### 2.3 Theo root cause (phân cụm thủ công 27 fail)
 | Root cause | Số lượng | % |
 |---|---|---|
-| **Retrieval sai chunk** (hit_rate=0) | 5 | 23.8% |
-| **Retrieval đúng nhưng answer extract sai câu** | 10 | 47.6% |
-| **Answer generic / placeholder** bị strict-judge phạt | 6 | 28.6% |
+| **Answer không match expected_answer** (judge score < 2) | 17 | 63.0% |
+| **Retrieval sai chunk** (hit_rate=0) | 5 | 18.5% |
+| **Answer generic / placeholder** bị strict-judge phạt | 5 | 18.5% |
 
 ---
 
@@ -110,12 +114,12 @@
 
 Ưu tiên theo tỷ lệ impact / effort:
 
-- [ ] **P0 — Bật Dense Retrieval (vector embedding)** — Fix ngay vocabulary gap (Case #1). Chỉ cần set `OPENAI_API_KEY` → retriever tự động nâng lên tier 2. Dự kiến Hit Rate @ top-5 tăng từ 91% → 96%+.
-- [ ] **P1 — Chunk metadata filter** — Thêm filter theo `section` / `department` để loại chunk không liên quan (Fix Case #2). Đã có sẵn metadata trong ChromaDB, chỉ cần wire lên query.
-- [ ] **P1 — Cross-Encoder Reranking** — Thay MMR bằng `ms-marco-MiniLM` để rerank top-20 thành top-5. Dự kiến MRR tăng từ 0.82 → 0.90+.
-- [ ] **P2 — Query Decomposition** — Dùng LLM nhỏ (gpt-4o-mini) decompose compound queries (Fix Case #3). Tăng cost eval nhưng đáng cho cases khó.
+- [ ] **P0 — Bật Dense Retrieval (vector embedding)** — Fix ngay vocabulary gap (Case #1). Chỉ cần set `OPENAI_API_KEY` hoặc dùng embedding model local → retriever tự động nâng lên tier 2. Dự kiến Hit Rate @ top-5 tăng từ 91% → 96%+.
+- [ ] **P1 — Chunk metadata filter** — Thêm filter theo `section` / `document_type` để loại chunk không liên quan (Fix Case #2). Đã có sẵn metadata trong ChromaDB, chỉ cần wire lên query.
+- [ ] **P1 — Cross-Encoder Reranking** — Thay MMR bằng cross-encoder (e.g. `ms-marco-MiniLM`) để rerank top-20 thành top-5. Dự kiến MRR tăng từ 0.82 → 0.90+.
+- [ ] **P2 — Query Decomposition** — Dùng LLM nhỏ decompose compound queries (Fix Case #3). Tăng cost eval nhưng đáng cho cases khó.
 - [ ] **P2 — Semantic Chunking** — Thay fixed-size chunking bằng semantic chunking (boundary theo ý, không theo byte). Giải quyết length bias.
-- [ ] **P3 — Bổ sung adversarial cases** — Golden set hiện 0 case `hard`. Thêm 10 cases kiểu prompt injection, out-of-context, ambiguous để Red Team.
+- [ ] **P3 — Bổ sung adversarial cases** — Golden set hiện ít case `hard`. Thêm 10+ cases kiểu prompt injection, out-of-context, ambiguous để Red Team.
 - [ ] **P3 — Upgrade Generation** — Answer hiện là extractive, nên tốt hơn bằng abstractive (gọi LLM thật) để pass rate tăng theo Hit Rate thay vì plateau ở 63.8%.
 
 ---
@@ -123,10 +127,10 @@
 ## 5. Release Gate Decision
 
 V2 được **APPROVE** cho release dựa trên:
-- ✅ `quality_not_regressed`: Judge score V2 == V1 (không giảm)
-- ✅ `retrieval_acceptable`: Hit Rate 91.4% ≥ 75%, MRR 0.82 ≥ 0.5
-- ✅ `judge_reliable`: Agreement rate 97% ≥ 70%
-- ✅ `latency_acceptable`: V2 latency +16% (< ngưỡng +30%)
-- ✅ `cost_acceptable`: V2 cost +$0.0001 (< ngưỡng +30%)
+- ✅ `quality_not_regressed`: Judge score V2 == V1 (3.181, không giảm)
+- ✅ `retrieval_acceptable`: Hit Rate 91.38% ≥ 75%, MRR 0.8233 ≥ 0.5
+- ✅ `judge_reliable`: Agreement rate 96.98% ≥ 70%
+- ✅ `latency_acceptable`: V2 latency +3.52% (0.1457s vs 0.1105s, < ngưỡng +30%)
+- ✅ `cost_acceptable`: V2 cost -$0.000026 (thực tế rẻ hơn V1, < ngưỡng +30%)
 
-→ **APPROVE** với note: V2 cải thiện retrieval nhưng **không** cải thiện end-to-end answer quality. Chỉ nên release khi kết hợp với một trong các action P0–P1 ở trên.
+→ **APPROVE** với note: V2 cải thiện retrieval (+3.45% Hit Rate, +0.013 MRR) nhưng **không** cải thiện end-to-end answer quality (pass rate vẫn 53.4%). Chỉ nên release khi kết hợp với một trong các action P0–P1 ở trên để nâng generation quality.
