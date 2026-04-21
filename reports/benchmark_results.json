@@ -1,0 +1,3076 @@
+[
+  {
+    "test_case": "case_001",
+    "question": "Tài liệu này quy định điều gì?",
+    "agent_response": "Tài liệu này quy định quy trình cấp phép truy cập vào các hệ thống nội bộ của công ty.",
+    "retrieved_ids": [
+      "access_control_sop_0",
+      "it_helpdesk_faq_1",
+      "it_helpdesk_faq_0",
+      "policy_refund_v4_2",
+      "sla_p1_2026_4"
+    ],
+    "expected_retrieval_ids": [
+      "access_control_sop_0"
+    ],
+    "latency": 0.141,
+    "tokens_used": 279,
+    "estimated_cost": 5.1e-05,
+    "ragas": {
+      "faithfulness": 0.868,
+      "relevancy": 0.836,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "access_control_sop_0"
+        ],
+        "retrieved_ids": [
+          "access_control_sop_0",
+          "it_helpdesk_faq_1",
+          "it_helpdesk_faq_0",
+          "policy_refund_v4_2",
+          "sla_p1_2026_4"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.80. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 408,
+      "estimated_cost": 0.000107
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_002",
+    "question": "Tài liệu này áp dụng cho những đối tượng nào?",
+    "agent_response": "Tài liệu này quy định quy trình cấp phép truy cập vào các hệ thống nội bộ của công ty.",
+    "retrieved_ids": [
+      "access_control_sop_0",
+      "policy_refund_v4_0",
+      "it_helpdesk_faq_1",
+      "access_control_sop_1",
+      "it_helpdesk_faq_0"
+    ],
+    "expected_retrieval_ids": [
+      "access_control_sop_0"
+    ],
+    "latency": 0.1406,
+    "tokens_used": 208,
+    "estimated_cost": 4.1e-05,
+    "ragas": {
+      "faithfulness": 0.935,
+      "relevancy": 0.761,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "access_control_sop_0"
+        ],
+        "retrieved_ids": [
+          "access_control_sop_0",
+          "policy_refund_v4_0",
+          "it_helpdesk_faq_1",
+          "access_control_sop_1",
+          "it_helpdesk_faq_0"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 1.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 1.0,
+        "strict-judge": 1.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.00, question relevance=0.40. strict-judge: Strict coverage=0.00; generic_penalty=False.",
+      "tokens_used": 416,
+      "estimated_cost": 0.000109
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_003",
+    "question": "Mức truy cập nào áp dụng cho tất cả nhân viên mới trong 30 ngày đầu?",
+    "agent_response": "Level 1 — Read Only:\nÁp dụng cho: Tất cả nhân viên mới trong 30 ngày đầu.",
+    "retrieved_ids": [
+      "access_control_sop_0",
+      "access_control_sop_1",
+      "it_helpdesk_faq_3",
+      "policy_refund_v4_0",
+      "hr_leave_policy_0"
+    ],
+    "expected_retrieval_ids": [
+      "access_control_sop_1"
+    ],
+    "latency": 0.1049,
+    "tokens_used": 298,
+    "estimated_cost": 5.3e-05,
+    "ragas": {
+      "faithfulness": 0.915,
+      "relevancy": 0.731,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 0.5,
+        "top_k": 5,
+        "expected_ids": [
+          "access_control_sop_1"
+        ],
+        "retrieved_ids": [
+          "access_control_sop_0",
+          "access_control_sop_1",
+          "it_helpdesk_faq_3",
+          "policy_refund_v4_0",
+          "hr_leave_policy_0"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.60. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 400,
+      "estimated_cost": 0.000105
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_004",
+    "question": "Mức Level 4 (Admin Access) cần những ai phê duyệt và có yêu cầu thêm gì?",
+    "agent_response": "Bước 2: Line Manager phê duyệt yêu cầu trong 1 ngày làm việc.",
+    "retrieved_ids": [
+      "access_control_sop_1",
+      "access_control_sop_2",
+      "it_helpdesk_faq_2",
+      "it_helpdesk_faq_4",
+      "hr_leave_policy_1"
+    ],
+    "expected_retrieval_ids": [
+      "access_control_sop_1"
+    ],
+    "latency": 0.1529,
+    "tokens_used": 333,
+    "estimated_cost": 5.7e-05,
+    "ragas": {
+      "faithfulness": 0.895,
+      "relevancy": 0.897,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "access_control_sop_1"
+        ],
+        "retrieved_ids": [
+          "access_control_sop_1",
+          "access_control_sop_2",
+          "it_helpdesk_faq_2",
+          "it_helpdesk_faq_4",
+          "hr_leave_policy_1"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 2.5,
+      "agreement_rate": 0.75,
+      "individual_scores": {
+        "semantic-judge": 3.0,
+        "strict-judge": 2.0
+      },
+      "confidence": "medium",
+      "needs_review": false,
+      "conflict_resolution": "moderate_disagreement_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.50, question relevance=0.44. strict-judge: Strict coverage=0.50; generic_penalty=False.",
+      "tokens_used": 426,
+      "estimated_cost": 0.000112
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_005",
+    "question": "Nhân viên tạo Access Request ticket trên Jira thuộc project nào?",
+    "agent_response": "Bước 1: Nhân viên tạo Access Request ticket trên Jira (project IT-ACCESS).",
+    "retrieved_ids": [
+      "access_control_sop_2",
+      "access_control_sop_6",
+      "it_helpdesk_faq_1",
+      "sla_p1_2026_3",
+      "it_helpdesk_faq_3"
+    ],
+    "expected_retrieval_ids": [
+      "access_control_sop_2"
+    ],
+    "latency": 0.1404,
+    "tokens_used": 228,
+    "estimated_cost": 4.2e-05,
+    "ragas": {
+      "faithfulness": 0.913,
+      "relevancy": 0.739,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "access_control_sop_2"
+        ],
+        "retrieved_ids": [
+          "access_control_sop_2",
+          "access_control_sop_6",
+          "it_helpdesk_faq_1",
+          "sla_p1_2026_3",
+          "it_helpdesk_faq_3"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.80. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 396,
+      "estimated_cost": 0.000104
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_006",
+    "question": "Trong quy trình, IT Security thực hiện review với những Level nào?",
+    "agent_response": "IT Security thực hiện access review mỗi 6 tháng.",
+    "retrieved_ids": [
+      "access_control_sop_5",
+      "access_control_sop_2",
+      "access_control_sop_3",
+      "access_control_sop_1",
+      "access_control_sop_0"
+    ],
+    "expected_retrieval_ids": [
+      "access_control_sop_2"
+    ],
+    "latency": 0.104,
+    "tokens_used": 237,
+    "estimated_cost": 4.1e-05,
+    "ragas": {
+      "faithfulness": 0.82,
+      "relevancy": 0.886,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 0.5,
+        "top_k": 5,
+        "expected_ids": [
+          "access_control_sop_2"
+        ],
+        "retrieved_ids": [
+          "access_control_sop_5",
+          "access_control_sop_2",
+          "access_control_sop_3",
+          "access_control_sop_1",
+          "access_control_sop_0"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 1.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 1.0,
+        "strict-judge": 1.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.00, question relevance=0.44. strict-judge: Strict coverage=0.00; generic_penalty=False.",
+      "tokens_used": 384,
+      "estimated_cost": 0.000101
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_007",
+    "question": "Trong trường hợp escalation khẩn cấp, thời hạn tối đa mà On-call IT Admin có thể cấp quyền tạm thời là bao nhiêu?",
+    "agent_response": "On-call IT Admin có thể cấp quyền tạm thời (max 24 giờ) sau khi được Tech Lead phê duyệt bằng lời.",
+    "retrieved_ids": [
+      "access_control_sop_3",
+      "access_control_sop_4",
+      "it_helpdesk_faq_4",
+      "hr_leave_policy_1",
+      "sla_p1_2026_0"
+    ],
+    "expected_retrieval_ids": [
+      "access_control_sop_3"
+    ],
+    "latency": 0.1416,
+    "tokens_used": 277,
+    "estimated_cost": 5.2e-05,
+    "ragas": {
+      "faithfulness": 0.935,
+      "relevancy": 0.813,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "access_control_sop_3"
+        ],
+        "retrieved_ids": [
+          "access_control_sop_3",
+          "access_control_sop_4",
+          "it_helpdesk_faq_4",
+          "hr_leave_policy_1",
+          "sla_p1_2026_0"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 2.5,
+      "agreement_rate": 0.75,
+      "individual_scores": {
+        "semantic-judge": 3.0,
+        "strict-judge": 2.0
+      },
+      "confidence": "medium",
+      "needs_review": false,
+      "conflict_resolution": "moderate_disagreement_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.50, question relevance=0.43. strict-judge: Strict coverage=0.50; generic_penalty=False.",
+      "tokens_used": 430,
+      "estimated_cost": 0.000113
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_008",
+    "question": "Trước khi On-call IT Admin cấp quyền tạm thời, ai phải phê duyệt và bằng hình thức nào?",
+    "agent_response": "On-call IT Admin có thể cấp quyền tạm thời (max 24 giờ) sau khi được Tech Lead phê duyệt bằng lời.",
+    "retrieved_ids": [
+      "access_control_sop_3",
+      "access_control_sop_2",
+      "access_control_sop_1",
+      "it_helpdesk_faq_2",
+      "sla_p1_2026_3"
+    ],
+    "expected_retrieval_ids": [
+      "access_control_sop_3"
+    ],
+    "latency": 0.1184,
+    "tokens_used": 382,
+    "estimated_cost": 6.8e-05,
+    "ragas": {
+      "faithfulness": 0.924,
+      "relevancy": 0.82,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "access_control_sop_3"
+        ],
+        "retrieved_ids": [
+          "access_control_sop_3",
+          "access_control_sop_2",
+          "access_control_sop_1",
+          "it_helpdesk_faq_2",
+          "sla_p1_2026_3"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.69. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 428,
+      "estimated_cost": 0.000112
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_009",
+    "question": "Khi nào quyền truy cập phải được thu hồi nếu nhân viên nghỉ việc?",
+    "agent_response": "Quyền phải được thu hồi trong các trường hợp:\n- Nhân viên nghỉ việc: Thu hồi ngay trong ngày cuối.",
+    "retrieved_ids": [
+      "access_control_sop_4",
+      "access_control_sop_3",
+      "access_control_sop_2",
+      "hr_leave_policy_0",
+      "hr_leave_policy_1"
+    ],
+    "expected_retrieval_ids": [
+      "access_control_sop_4"
+    ],
+    "latency": 0.1584,
+    "tokens_used": 271,
+    "estimated_cost": 5.1e-05,
+    "ragas": {
+      "faithfulness": 0.883,
+      "relevancy": 0.746,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "access_control_sop_4"
+        ],
+        "retrieved_ids": [
+          "access_control_sop_4",
+          "access_control_sop_3",
+          "access_control_sop_2",
+          "hr_leave_policy_0",
+          "hr_leave_policy_1"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.73. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 414,
+      "estimated_cost": 0.000109
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_010",
+    "question": "Theo Section 5, quy định về thời hạn thu hồi quyền truy cập khi nhân viên chuyển bộ phận là gì?",
+    "agent_response": "Quyền phải được thu hồi trong các trường hợp:\n- Nhân viên nghỉ việc: Thu hồi ngay trong ngày cuối.",
+    "retrieved_ids": [
+      "access_control_sop_4",
+      "access_control_sop_0",
+      "access_control_sop_3",
+      "hr_leave_policy_0",
+      "it_helpdesk_faq_4"
+    ],
+    "expected_retrieval_ids": [
+      "access_control_sop_4"
+    ],
+    "latency": 0.1413,
+    "tokens_used": 240,
+    "estimated_cost": 4.7e-05,
+    "ragas": {
+      "faithfulness": 0.839,
+      "relevancy": 0.855,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "access_control_sop_4"
+        ],
+        "retrieved_ids": [
+          "access_control_sop_4",
+          "access_control_sop_0",
+          "access_control_sop_3",
+          "hr_leave_policy_0",
+          "it_helpdesk_faq_4"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 2.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 2.0,
+        "strict-judge": 2.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.40, question relevance=0.36. strict-judge: Strict coverage=0.40; generic_penalty=False.",
+      "tokens_used": 430,
+      "estimated_cost": 0.000113
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_011",
+    "question": "IT Security thực hiện access review với tần suất như thế nào?",
+    "agent_response": "IT Security thực hiện access review mỗi 6 tháng.",
+    "retrieved_ids": [
+      "access_control_sop_5",
+      "access_control_sop_2",
+      "it_helpdesk_faq_3",
+      "policy_refund_v4_4",
+      "access_control_sop_1"
+    ],
+    "expected_retrieval_ids": [
+      "access_control_sop_5"
+    ],
+    "latency": 0.0952,
+    "tokens_used": 200,
+    "estimated_cost": 3.5e-05,
+    "ragas": {
+      "faithfulness": 0.883,
+      "relevancy": 0.874,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "access_control_sop_5"
+        ],
+        "retrieved_ids": [
+          "access_control_sop_5",
+          "access_control_sop_2",
+          "it_helpdesk_faq_3",
+          "policy_refund_v4_4",
+          "access_control_sop_1"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.50. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 380,
+      "estimated_cost": 0.0001
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_012",
+    "question": "Trong khoảng thời gian nào mọi bất thường phải được báo cáo lên CISO?",
+    "agent_response": "Mọi bất thường phải được báo cáo lên CISO trong vòng 24 giờ.",
+    "retrieved_ids": [
+      "access_control_sop_5",
+      "access_control_sop_1",
+      "it_helpdesk_faq_3",
+      "access_control_sop_3",
+      "it_helpdesk_faq_4"
+    ],
+    "expected_retrieval_ids": [
+      "access_control_sop_5"
+    ],
+    "latency": 0.1457,
+    "tokens_used": 285,
+    "estimated_cost": 5e-05,
+    "ragas": {
+      "faithfulness": 0.832,
+      "relevancy": 0.852,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "access_control_sop_5"
+        ],
+        "retrieved_ids": [
+          "access_control_sop_5",
+          "access_control_sop_1",
+          "it_helpdesk_faq_3",
+          "access_control_sop_3",
+          "it_helpdesk_faq_4"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.67. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 392,
+      "estimated_cost": 0.000103
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_013",
+    "question": "Hệ thống IAM nào được liệt kê trong mục 'Công cụ liên quan'?",
+    "agent_response": "Q: Laptop mới được cấp sau bao lâu khi vào công ty?",
+    "retrieved_ids": [
+      "it_helpdesk_faq_3",
+      "it_helpdesk_faq_1",
+      "it_helpdesk_faq_4",
+      "it_helpdesk_faq_0",
+      "policy_refund_v4_2"
+    ],
+    "expected_retrieval_ids": [
+      "access_control_sop_6"
+    ],
+    "latency": 0.1013,
+    "tokens_used": 259,
+    "estimated_cost": 4.4e-05,
+    "ragas": {
+      "faithfulness": 0.806,
+      "relevancy": 0.873,
+      "retrieval": {
+        "hit_rate": 0.0,
+        "mrr": 0.0,
+        "top_k": 5,
+        "expected_ids": [
+          "access_control_sop_6"
+        ],
+        "retrieved_ids": [
+          "it_helpdesk_faq_3",
+          "it_helpdesk_faq_1",
+          "it_helpdesk_faq_4",
+          "it_helpdesk_faq_0",
+          "policy_refund_v4_2"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 1.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 1.0,
+        "strict-judge": 1.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.00, question relevance=0.22. strict-judge: Strict coverage=0.00; generic_penalty=False.",
+      "tokens_used": 376,
+      "estimated_cost": 9.9e-05
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_014",
+    "question": "Địa chỉ email nội bộ để liên hệ về truy cập được ghi trong tài liệu là gì?",
+    "agent_response": "Tài liệu này quy định quy trình cấp phép truy cập vào các hệ thống nội bộ của công ty.",
+    "retrieved_ids": [
+      "access_control_sop_0",
+      "it_helpdesk_faq_4",
+      "it_helpdesk_faq_0",
+      "access_control_sop_3",
+      "it_helpdesk_faq_1"
+    ],
+    "expected_retrieval_ids": [
+      "access_control_sop_6"
+    ],
+    "latency": 0.1263,
+    "tokens_used": 267,
+    "estimated_cost": 5e-05,
+    "ragas": {
+      "faithfulness": 0.783,
+      "relevancy": 0.83,
+      "retrieval": {
+        "hit_rate": 0.0,
+        "mrr": 0.0,
+        "top_k": 5,
+        "expected_ids": [
+          "access_control_sop_6"
+        ],
+        "retrieved_ids": [
+          "access_control_sop_0",
+          "it_helpdesk_faq_4",
+          "it_helpdesk_faq_0",
+          "access_control_sop_3",
+          "it_helpdesk_faq_1"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 1.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 1.0,
+        "strict-judge": 1.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.00, question relevance=0.50. strict-judge: Strict coverage=0.00; generic_penalty=False.",
+      "tokens_used": 410,
+      "estimated_cost": 0.000108
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_015",
+    "question": "Tôi quên mật khẩu, phải làm gì để lấy lại?",
+    "agent_response": "Q: Tôi quên mật khẩu, phải làm gì?",
+    "retrieved_ids": [
+      "it_helpdesk_faq_0",
+      "it_helpdesk_faq_1",
+      "it_helpdesk_faq_2",
+      "it_helpdesk_faq_4",
+      "hr_leave_policy_3"
+    ],
+    "expected_retrieval_ids": [
+      "it_helpdesk_faq_0"
+    ],
+    "latency": 0.126,
+    "tokens_used": 302,
+    "estimated_cost": 4.9e-05,
+    "ragas": {
+      "faithfulness": 0.884,
+      "relevancy": 0.743,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "it_helpdesk_faq_0"
+        ],
+        "retrieved_ids": [
+          "it_helpdesk_faq_0",
+          "it_helpdesk_faq_1",
+          "it_helpdesk_faq_2",
+          "it_helpdesk_faq_4",
+          "hr_leave_policy_3"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 1.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 1.0,
+        "strict-judge": 1.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.09, question relevance=0.71. strict-judge: Strict coverage=0.09; generic_penalty=False.",
+      "tokens_used": 426,
+      "estimated_cost": 0.000112
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_016",
+    "question": "Tài khoản sẽ bị khóa sau bao nhiêu lần đăng nhập sai và làm thế nào để mở khóa?",
+    "agent_response": "Q: Tài khoản bị khóa sau bao nhiêu lần đăng nhập sai?",
+    "retrieved_ids": [
+      "it_helpdesk_faq_0",
+      "it_helpdesk_faq_1",
+      "it_helpdesk_faq_3",
+      "sla_p1_2026_0",
+      "policy_refund_v4_2"
+    ],
+    "expected_retrieval_ids": [
+      "it_helpdesk_faq_0"
+    ],
+    "latency": 0.15,
+    "tokens_used": 317,
+    "estimated_cost": 5.3e-05,
+    "ragas": {
+      "faithfulness": 0.828,
+      "relevancy": 0.895,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "it_helpdesk_faq_0"
+        ],
+        "retrieved_ids": [
+          "it_helpdesk_faq_0",
+          "it_helpdesk_faq_1",
+          "it_helpdesk_faq_3",
+          "sla_p1_2026_0",
+          "policy_refund_v4_2"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 2.5,
+      "agreement_rate": 0.75,
+      "individual_scores": {
+        "semantic-judge": 3.0,
+        "strict-judge": 2.0
+      },
+      "confidence": "medium",
+      "needs_review": false,
+      "conflict_resolution": "moderate_disagreement_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.50, question relevance=0.83. strict-judge: Strict coverage=0.50; generic_penalty=False.",
+      "tokens_used": 440,
+      "estimated_cost": 0.000116
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_017",
+    "question": "Phần mềm VPN nào công ty sử dụng?",
+    "agent_response": "Q: Phần mềm VPN nào công ty dùng?",
+    "retrieved_ids": [
+      "it_helpdesk_faq_1",
+      "it_helpdesk_faq_2",
+      "it_helpdesk_faq_3",
+      "access_control_sop_0",
+      "sla_p1_2026_0"
+    ],
+    "expected_retrieval_ids": [
+      "it_helpdesk_faq_1"
+    ],
+    "latency": 0.1202,
+    "tokens_used": 249,
+    "estimated_cost": 4.1e-05,
+    "ragas": {
+      "faithfulness": 0.755,
+      "relevancy": 0.754,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "it_helpdesk_faq_1"
+        ],
+        "retrieved_ids": [
+          "it_helpdesk_faq_1",
+          "it_helpdesk_faq_2",
+          "it_helpdesk_faq_3",
+          "access_control_sop_0",
+          "sla_p1_2026_0"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 2.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 2.0,
+        "strict-judge": 2.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.30, question relevance=1.00. strict-judge: Strict coverage=0.30; generic_penalty=False.",
+      "tokens_used": 394,
+      "estimated_cost": 0.000104
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_018",
+    "question": "Nếu kiểm tra kết nối Internet nhưng VPN vẫn bị mất kết nối liên tục, công ty yêu cầu làm gì tiếp theo?",
+    "agent_response": "Q: Tôi bị mất kết nối VPN liên tục, phải làm gì?",
+    "retrieved_ids": [
+      "it_helpdesk_faq_1",
+      "hr_leave_policy_3",
+      "it_helpdesk_faq_0",
+      "it_helpdesk_faq_3",
+      "it_helpdesk_faq_4"
+    ],
+    "expected_retrieval_ids": [
+      "it_helpdesk_faq_1"
+    ],
+    "latency": 0.0948,
+    "tokens_used": 333,
+    "estimated_cost": 5.5e-05,
+    "ragas": {
+      "faithfulness": 0.828,
+      "relevancy": 0.777,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "it_helpdesk_faq_1"
+        ],
+        "retrieved_ids": [
+          "it_helpdesk_faq_1",
+          "hr_leave_policy_3",
+          "it_helpdesk_faq_0",
+          "it_helpdesk_faq_3",
+          "it_helpdesk_faq_4"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 1.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 1.0,
+        "strict-judge": 1.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.12, question relevance=0.47. strict-judge: Strict coverage=0.12; generic_penalty=False.",
+      "tokens_used": 414,
+      "estimated_cost": 0.000109
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_019",
+    "question": "Khi cần cài phần mềm mới, yêu cầu phải gửi qua đâu?",
+    "agent_response": "Q: Tôi cần cài phần mềm mới, phải làm gì?",
+    "retrieved_ids": [
+      "it_helpdesk_faq_2",
+      "sla_p1_2026_1",
+      "it_helpdesk_faq_1",
+      "hr_leave_policy_1",
+      "sla_p1_2026_2"
+    ],
+    "expected_retrieval_ids": [
+      "it_helpdesk_faq_2"
+    ],
+    "latency": 0.1193,
+    "tokens_used": 344,
+    "estimated_cost": 5.6e-05,
+    "ragas": {
+      "faithfulness": 0.795,
+      "relevancy": 0.713,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "it_helpdesk_faq_2"
+        ],
+        "retrieved_ids": [
+          "it_helpdesk_faq_2",
+          "sla_p1_2026_1",
+          "it_helpdesk_faq_1",
+          "hr_leave_policy_1",
+          "sla_p1_2026_2"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 1.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 1.0,
+        "strict-judge": 1.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.00, question relevance=0.50. strict-judge: Strict coverage=0.00; generic_penalty=False.",
+      "tokens_used": 384,
+      "estimated_cost": 0.000101
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_020",
+    "question": "Ai quản lý việc gia hạn license và khi nào sẽ có nhắc nhở?",
+    "agent_response": "Nhắc nhở sẽ được gửi 30 ngày trước khi hết hạn.",
+    "retrieved_ids": [
+      "it_helpdesk_faq_2",
+      "it_helpdesk_faq_0",
+      "sla_p1_2026_1",
+      "policy_refund_v4_2",
+      "policy_refund_v4_3"
+    ],
+    "expected_retrieval_ids": [
+      "it_helpdesk_faq_2"
+    ],
+    "latency": 0.1137,
+    "tokens_used": 377,
+    "estimated_cost": 6.2e-05,
+    "ragas": {
+      "faithfulness": 0.799,
+      "relevancy": 0.739,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "it_helpdesk_faq_2"
+        ],
+        "retrieved_ids": [
+          "it_helpdesk_faq_2",
+          "it_helpdesk_faq_0",
+          "sla_p1_2026_1",
+          "policy_refund_v4_2",
+          "policy_refund_v4_3"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 3.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 3.0,
+        "strict-judge": 3.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.62, question relevance=0.38. strict-judge: Strict coverage=0.62; generic_penalty=False.",
+      "tokens_used": 414,
+      "estimated_cost": 0.000109
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_021",
+    "question": "Laptop mới được cấp khi nào cho nhân viên?",
+    "agent_response": "Q: Laptop mới được cấp sau bao lâu khi vào công ty?",
+    "retrieved_ids": [
+      "it_helpdesk_faq_3",
+      "access_control_sop_0",
+      "access_control_sop_2",
+      "hr_leave_policy_0",
+      "access_control_sop_1"
+    ],
+    "expected_retrieval_ids": [
+      "it_helpdesk_faq_3"
+    ],
+    "latency": 0.1049,
+    "tokens_used": 205,
+    "estimated_cost": 3.6e-05,
+    "ragas": {
+      "faithfulness": 0.925,
+      "relevancy": 0.706,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "it_helpdesk_faq_3"
+        ],
+        "retrieved_ids": [
+          "it_helpdesk_faq_3",
+          "access_control_sop_0",
+          "access_control_sop_2",
+          "hr_leave_policy_0",
+          "access_control_sop_1"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 2.5,
+      "agreement_rate": 0.75,
+      "individual_scores": {
+        "semantic-judge": 3.0,
+        "strict-judge": 2.0
+      },
+      "confidence": "medium",
+      "needs_review": false,
+      "conflict_resolution": "moderate_disagreement_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.50, question relevance=0.57. strict-judge: Strict coverage=0.50; generic_penalty=False.",
+      "tokens_used": 386,
+      "estimated_cost": 0.000102
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_022",
+    "question": "Khi laptop bị hỏng, nhân viên cần tạo loại ticket nào và mang thiết bị đến đâu để kiểm tra?",
+    "agent_response": "Mang thiết bị đến IT Room (tầng 3) để kiểm tra.",
+    "retrieved_ids": [
+      "it_helpdesk_faq_3",
+      "it_helpdesk_faq_1",
+      "access_control_sop_2",
+      "it_helpdesk_faq_4",
+      "sla_p1_2026_1"
+    ],
+    "expected_retrieval_ids": [
+      "it_helpdesk_faq_3"
+    ],
+    "latency": 0.121,
+    "tokens_used": 271,
+    "estimated_cost": 4.6e-05,
+    "ragas": {
+      "faithfulness": 0.86,
+      "relevancy": 0.755,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "it_helpdesk_faq_3"
+        ],
+        "retrieved_ids": [
+          "it_helpdesk_faq_3",
+          "it_helpdesk_faq_1",
+          "access_control_sop_2",
+          "it_helpdesk_faq_4",
+          "sla_p1_2026_1"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 2.5,
+      "agreement_rate": 0.75,
+      "individual_scores": {
+        "semantic-judge": 3.0,
+        "strict-judge": 2.0
+      },
+      "confidence": "medium",
+      "needs_review": false,
+      "conflict_resolution": "moderate_disagreement_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.50, question relevance=0.33. strict-judge: Strict coverage=0.50; generic_penalty=False.",
+      "tokens_used": 432,
+      "estimated_cost": 0.000113
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_023",
+    "question": "Dung lượng tiêu chuẩn của hộp thư là bao nhiêu?",
+    "agent_response": "Dung lượng tiêu chuẩn là 50GB.",
+    "retrieved_ids": [
+      "it_helpdesk_faq_4",
+      "hr_leave_policy_2",
+      "access_control_sop_0",
+      "access_control_sop_4",
+      "it_helpdesk_faq_0"
+    ],
+    "expected_retrieval_ids": [
+      "it_helpdesk_faq_4"
+    ],
+    "latency": 0.1038,
+    "tokens_used": 184,
+    "estimated_cost": 3.1e-05,
+    "ragas": {
+      "faithfulness": 0.79,
+      "relevancy": 0.719,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "it_helpdesk_faq_4"
+        ],
+        "retrieved_ids": [
+          "it_helpdesk_faq_4",
+          "hr_leave_policy_2",
+          "access_control_sop_0",
+          "access_control_sop_4",
+          "it_helpdesk_faq_0"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.50. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 358,
+      "estimated_cost": 9.4e-05
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_024",
+    "question": "Nếu không nhận được email từ bên ngoài và đã kiểm tra thư mục Spam, bước tiếp theo là gì?",
+    "agent_response": "Q: Tôi không nhận được email từ bên ngoài?",
+    "retrieved_ids": [
+      "it_helpdesk_faq_4",
+      "access_control_sop_2",
+      "policy_refund_v4_2",
+      "sla_p1_2026_2",
+      "hr_leave_policy_0"
+    ],
+    "expected_retrieval_ids": [
+      "it_helpdesk_faq_4"
+    ],
+    "latency": 0.0979,
+    "tokens_used": 261,
+    "estimated_cost": 4.4e-05,
+    "ragas": {
+      "faithfulness": 0.875,
+      "relevancy": 0.769,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "it_helpdesk_faq_4"
+        ],
+        "retrieved_ids": [
+          "it_helpdesk_faq_4",
+          "access_control_sop_2",
+          "policy_refund_v4_2",
+          "sla_p1_2026_2",
+          "hr_leave_policy_0"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 1.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 1.0,
+        "strict-judge": 1.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.12, question relevance=0.46. strict-judge: Strict coverage=0.12; generic_penalty=False.",
+      "tokens_used": 410,
+      "estimated_cost": 0.000108
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_025",
+    "question": "Số hotline của IT Helpdesk trong giờ làm việc là gì?",
+    "agent_response": "9000 (8:00 - 18:00, Thứ 2 - Thứ 6)\nEmail: helpdesk@company.internal\nJira: project IT-SUPPORT\nSlack: #it-helpdesk\nEmergency (ngoài giờ): ext.",
+    "retrieved_ids": [
+      "it_helpdesk_faq_5",
+      "it_helpdesk_faq_4",
+      "it_helpdesk_faq_0",
+      "policy_refund_v4_5",
+      "hr_leave_policy_2"
+    ],
+    "expected_retrieval_ids": [
+      "it_helpdesk_faq_5"
+    ],
+    "latency": 0.1165,
+    "tokens_used": 278,
+    "estimated_cost": 5.7e-05,
+    "ragas": {
+      "faithfulness": 0.877,
+      "relevancy": 0.76,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "it_helpdesk_faq_5"
+        ],
+        "retrieved_ids": [
+          "it_helpdesk_faq_5",
+          "it_helpdesk_faq_4",
+          "it_helpdesk_faq_0",
+          "policy_refund_v4_5",
+          "hr_leave_policy_2"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.40. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 434,
+      "estimated_cost": 0.000114
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_026",
+    "question": "Nếu cần tạo ticket trên Jira cho IT Helpdesk, phải chọn project nào?",
+    "agent_response": "Bước 1: Nhân viên tạo Access Request ticket trên Jira (project IT-ACCESS).",
+    "retrieved_ids": [
+      "it_helpdesk_faq_5",
+      "access_control_sop_2",
+      "it_helpdesk_faq_1",
+      "it_helpdesk_faq_3",
+      "access_control_sop_6"
+    ],
+    "expected_retrieval_ids": [
+      "it_helpdesk_faq_5"
+    ],
+    "latency": 0.0972,
+    "tokens_used": 241,
+    "estimated_cost": 4.4e-05,
+    "ragas": {
+      "faithfulness": 0.941,
+      "relevancy": 0.867,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "it_helpdesk_faq_5"
+        ],
+        "retrieved_ids": [
+          "it_helpdesk_faq_5",
+          "access_control_sop_2",
+          "it_helpdesk_faq_1",
+          "it_helpdesk_faq_3",
+          "access_control_sop_6"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 2.5,
+      "agreement_rate": 0.75,
+      "individual_scores": {
+        "semantic-judge": 3.0,
+        "strict-judge": 2.0
+      },
+      "confidence": "medium",
+      "needs_review": false,
+      "conflict_resolution": "moderate_disagreement_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.50, question relevance=0.57. strict-judge: Strict coverage=0.50; generic_penalty=False.",
+      "tokens_used": 398,
+      "estimated_cost": 0.000105
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_027",
+    "question": "Chính sách này áp dụng cho những đơn hàng nào và có hiệu lực từ ngày nào?",
+    "agent_response": "Chính sách này áp dụng cho tất cả các đơn hàng được đặt trên hệ thống nội bộ kể từ ngày 01/02/2026.",
+    "retrieved_ids": [
+      "policy_refund_v4_0",
+      "it_helpdesk_faq_1",
+      "access_control_sop_0",
+      "access_control_sop_1",
+      "policy_refund_v4_2"
+    ],
+    "expected_retrieval_ids": [
+      "policy_refund_v4_0"
+    ],
+    "latency": 0.0891,
+    "tokens_used": 218,
+    "estimated_cost": 4.4e-05,
+    "ragas": {
+      "faithfulness": 0.854,
+      "relevancy": 0.789,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "policy_refund_v4_0"
+        ],
+        "retrieved_ids": [
+          "policy_refund_v4_0",
+          "it_helpdesk_faq_1",
+          "access_control_sop_0",
+          "access_control_sop_1",
+          "policy_refund_v4_2"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.62. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 446,
+      "estimated_cost": 0.000117
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_028",
+    "question": "Đơn hàng đặt trước ngày có hiệu lực (01/02/2026) sẽ áp dụng theo phiên bản chính sách hoàn tiền nào?",
+    "agent_response": "Các đơn hàng đặt trước ngày có hiệu lực sẽ áp dụng theo chính sách hoàn tiền phiên bản 3.",
+    "retrieved_ids": [
+      "policy_refund_v4_0",
+      "sla_p1_2026_4",
+      "policy_refund_v4_2",
+      "policy_refund_v4_4",
+      "it_helpdesk_faq_2"
+    ],
+    "expected_retrieval_ids": [
+      "policy_refund_v4_0"
+    ],
+    "latency": 0.137,
+    "tokens_used": 221,
+    "estimated_cost": 4.3e-05,
+    "ragas": {
+      "faithfulness": 0.89,
+      "relevancy": 0.779,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "policy_refund_v4_0"
+        ],
+        "retrieved_ids": [
+          "policy_refund_v4_0",
+          "sla_p1_2026_4",
+          "policy_refund_v4_2",
+          "policy_refund_v4_4",
+          "it_helpdesk_faq_2"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.86. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 458,
+      "estimated_cost": 0.00012
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_029",
+    "question": "Trong bao lâu kể từ thời điểm xác nhận đơn hàng khách hàng phải gửi yêu cầu hoàn tiền?",
+    "agent_response": "Hoàn tiền — Điều kiện áp dụng:\nYêu cầu được gửi trong vòng 7 ngày kể từ thời điểm xác nhận đơn hàng.",
+    "retrieved_ids": [
+      "policy_refund_v4_1",
+      "policy_refund_v4_2",
+      "policy_refund_v4_3",
+      "policy_refund_v4_0",
+      "policy_refund_v4_4"
+    ],
+    "expected_retrieval_ids": [
+      "policy_refund_v4_1"
+    ],
+    "latency": 0.1456,
+    "tokens_used": 282,
+    "estimated_cost": 5.4e-05,
+    "ragas": {
+      "faithfulness": 0.792,
+      "relevancy": 0.762,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "policy_refund_v4_1"
+        ],
+        "retrieved_ids": [
+          "policy_refund_v4_1",
+          "policy_refund_v4_2",
+          "policy_refund_v4_3",
+          "policy_refund_v4_0",
+          "policy_refund_v4_4"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 4.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 4.0,
+        "strict-judge": 4.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.78, question relevance=0.77. strict-judge: Strict coverage=0.78; generic_penalty=False.",
+      "tokens_used": 442,
+      "estimated_cost": 0.000116
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_030",
+    "question": "Sản phẩm bị lỗi do người dùng có được hoàn tiền không?",
+    "agent_response": "Khách hàng được quyền yêu cầu hoàn tiền khi đáp ứng đủ các điều kiện sau:\n- Sản phẩm bị lỗi do nhà sản xuất, không phải do người dùng.",
+    "retrieved_ids": [
+      "policy_refund_v4_1",
+      "policy_refund_v4_2",
+      "sla_p1_2026_0",
+      "it_helpdesk_faq_1",
+      "policy_refund_v4_4"
+    ],
+    "expected_retrieval_ids": [
+      "policy_refund_v4_1"
+    ],
+    "latency": 0.1367,
+    "tokens_used": 329,
+    "estimated_cost": 6.4e-05,
+    "ragas": {
+      "faithfulness": 0.885,
+      "relevancy": 0.82,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "policy_refund_v4_1"
+        ],
+        "retrieved_ids": [
+          "policy_refund_v4_1",
+          "policy_refund_v4_2",
+          "sla_p1_2026_0",
+          "it_helpdesk_faq_1",
+          "policy_refund_v4_4"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.92, question relevance=1.00. strict-judge: Strict coverage=0.92; generic_penalty=False.",
+      "tokens_used": 456,
+      "estimated_cost": 0.00012
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_031",
+    "question": "Trong bao lâu phải gửi yêu cầu để được hoàn tiền?",
+    "agent_response": "Hoàn tiền — Điều kiện áp dụng:\nYêu cầu được gửi trong vòng 7 ngày kể từ thời điểm xác nhận đơn hàng.",
+    "retrieved_ids": [
+      "it_helpdesk_faq_3",
+      "policy_refund_v4_2",
+      "policy_refund_v4_1",
+      "policy_refund_v4_3",
+      "hr_leave_policy_1"
+    ],
+    "expected_retrieval_ids": [
+      "policy_refund_v4_2"
+    ],
+    "latency": 0.1106,
+    "tokens_used": 259,
+    "estimated_cost": 5e-05,
+    "ragas": {
+      "faithfulness": 0.922,
+      "relevancy": 0.77,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 0.5,
+        "top_k": 5,
+        "expected_ids": [
+          "policy_refund_v4_2"
+        ],
+        "retrieved_ids": [
+          "it_helpdesk_faq_3",
+          "policy_refund_v4_2",
+          "policy_refund_v4_1",
+          "policy_refund_v4_3",
+          "hr_leave_policy_1"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.75. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 420,
+      "estimated_cost": 0.00011
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_032",
+    "question": "Nêu các trường hợp ngoại lệ không được hoàn tiền theo tài liệu.",
+    "agent_response": "Ngoại lệ không được hoàn tiền:\n- Sản phẩm thuộc danh mục hàng kỹ thuật số (license key, subscription).",
+    "retrieved_ids": [
+      "policy_refund_v4_2",
+      "access_control_sop_0",
+      "policy_refund_v4_4",
+      "policy_refund_v4_0",
+      "access_control_sop_4"
+    ],
+    "expected_retrieval_ids": [
+      "policy_refund_v4_2"
+    ],
+    "latency": 0.1494,
+    "tokens_used": 217,
+    "estimated_cost": 4.4e-05,
+    "ragas": {
+      "faithfulness": 0.938,
+      "relevancy": 0.77,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "policy_refund_v4_2"
+        ],
+        "retrieved_ids": [
+          "policy_refund_v4_2",
+          "access_control_sop_0",
+          "policy_refund_v4_4",
+          "policy_refund_v4_0",
+          "access_control_sop_4"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 2.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 2.0,
+        "strict-judge": 2.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.41, question relevance=0.56. strict-judge: Strict coverage=0.41; generic_penalty=False.",
+      "tokens_used": 500,
+      "estimated_cost": 0.000131
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_033",
+    "question": "Khách hàng phải gửi yêu cầu hoàn tiền như thế nào?",
+    "agent_response": "Khách hàng được quyền yêu cầu hoàn tiền khi đáp ứng đủ các điều kiện sau:\n- Sản phẩm bị lỗi do nhà sản xuất, không phải do người dùng.",
+    "retrieved_ids": [
+      "policy_refund_v4_4",
+      "policy_refund_v4_1",
+      "policy_refund_v4_3",
+      "it_helpdesk_faq_3",
+      "policy_refund_v4_2"
+    ],
+    "expected_retrieval_ids": [
+      "policy_refund_v4_3"
+    ],
+    "latency": 0.1022,
+    "tokens_used": 251,
+    "estimated_cost": 5.3e-05,
+    "ragas": {
+      "faithfulness": 0.948,
+      "relevancy": 0.78,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 0.3333333333333333,
+        "top_k": 5,
+        "expected_ids": [
+          "policy_refund_v4_3"
+        ],
+        "retrieved_ids": [
+          "policy_refund_v4_4",
+          "policy_refund_v4_1",
+          "policy_refund_v4_3",
+          "it_helpdesk_faq_3",
+          "policy_refund_v4_2"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 2.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 2.0,
+        "strict-judge": 2.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.31, question relevance=0.67. strict-judge: Strict coverage=0.31; generic_penalty=False.",
+      "tokens_used": 450,
+      "estimated_cost": 0.000118
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_034",
+    "question": "CS Agent và Finance Team mỗi bên có thời hạn xử lý yêu cầu hoàn tiền là bao lâu, và Finance Team có thực hiện hành động gì sau khi xử lý?",
+    "agent_response": "Bước 3: Nếu đủ điều kiện, chuyển yêu cầu sang Finance Team để xử lý hoàn tiền.",
+    "retrieved_ids": [
+      "policy_refund_v4_3",
+      "sla_p1_2026_1",
+      "access_control_sop_1",
+      "it_helpdesk_faq_4",
+      "it_helpdesk_faq_2"
+    ],
+    "expected_retrieval_ids": [
+      "policy_refund_v4_3"
+    ],
+    "latency": 0.1016,
+    "tokens_used": 453,
+    "estimated_cost": 7.7e-05,
+    "ragas": {
+      "faithfulness": 0.752,
+      "relevancy": 0.887,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "policy_refund_v4_3"
+        ],
+        "retrieved_ids": [
+          "policy_refund_v4_3",
+          "sla_p1_2026_1",
+          "access_control_sop_1",
+          "it_helpdesk_faq_4",
+          "it_helpdesk_faq_2"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 1.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 1.0,
+        "strict-judge": 1.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.13, question relevance=0.33. strict-judge: Strict coverage=0.13; generic_penalty=False.",
+      "tokens_used": 488,
+      "estimated_cost": 0.000128
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_035",
+    "question": "Hoàn tiền qua phương thức thanh toán gốc áp dụng trong bao nhiêu trường hợp đủ điều kiện?",
+    "agent_response": "- Hoàn tiền qua phương thức thanh toán gốc: áp dụng trong 100% trường hợp đủ điều kiện.",
+    "retrieved_ids": [
+      "policy_refund_v4_4",
+      "policy_refund_v4_2",
+      "policy_refund_v4_3",
+      "access_control_sop_4",
+      "hr_leave_policy_1"
+    ],
+    "expected_retrieval_ids": [
+      "policy_refund_v4_4"
+    ],
+    "latency": 0.1317,
+    "tokens_used": 268,
+    "estimated_cost": 5e-05,
+    "ragas": {
+      "faithfulness": 0.939,
+      "relevancy": 0.88,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "policy_refund_v4_4"
+        ],
+        "retrieved_ids": [
+          "policy_refund_v4_4",
+          "policy_refund_v4_2",
+          "policy_refund_v4_3",
+          "access_control_sop_4",
+          "hr_leave_policy_1"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.87. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 426,
+      "estimated_cost": 0.000112
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_036",
+    "question": "Nếu khách hàng chọn nhận credit nội bộ (store credit) thay vì hoàn về phương thức thanh toán gốc, giá trị credit sẽ bằng bao nhiêu so với số tiền hoàn?",
+    "agent_response": "- Hoàn tiền qua credit nội bộ (store credit): khách hàng có thể chọn nhận store credit thay thế với giá trị 110% so với số tiền hoàn.",
+    "retrieved_ids": [
+      "policy_refund_v4_4",
+      "policy_refund_v4_3",
+      "policy_refund_v4_2",
+      "policy_refund_v4_0",
+      "sla_p1_2026_0"
+    ],
+    "expected_retrieval_ids": [
+      "policy_refund_v4_4"
+    ],
+    "latency": 0.086,
+    "tokens_used": 295,
+    "estimated_cost": 5.9e-05,
+    "ragas": {
+      "faithfulness": 0.804,
+      "relevancy": 0.852,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "policy_refund_v4_4"
+        ],
+        "retrieved_ids": [
+          "policy_refund_v4_4",
+          "policy_refund_v4_3",
+          "policy_refund_v4_2",
+          "policy_refund_v4_0",
+          "sla_p1_2026_0"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.62. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 478,
+      "estimated_cost": 0.000126
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_037",
+    "question": "Địa chỉ email liên hệ bộ phận CS để hỗ trợ hoàn tiền là gì?",
+    "agent_response": "Nếu vẫn không có, tạo ticket P2 kèm địa chỉ email gửi và thời gian gửi.",
+    "retrieved_ids": [
+      "it_helpdesk_faq_4",
+      "sla_p1_2026_2",
+      "policy_refund_v4_5",
+      "policy_refund_v4_3",
+      "it_helpdesk_faq_0"
+    ],
+    "expected_retrieval_ids": [
+      "policy_refund_v4_5"
+    ],
+    "latency": 0.1372,
+    "tokens_used": 239,
+    "estimated_cost": 4.3e-05,
+    "ragas": {
+      "faithfulness": 0.912,
+      "relevancy": 0.897,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 0.3333333333333333,
+        "top_k": 5,
+        "expected_ids": [
+          "policy_refund_v4_5"
+        ],
+        "retrieved_ids": [
+          "it_helpdesk_faq_4",
+          "sla_p1_2026_2",
+          "policy_refund_v4_5",
+          "policy_refund_v4_3",
+          "it_helpdesk_faq_0"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 1.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 1.0,
+        "strict-judge": 1.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.00, question relevance=0.29. strict-judge: Strict coverage=0.00; generic_penalty=False.",
+      "tokens_used": 394,
+      "estimated_cost": 0.000104
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_038",
+    "question": "Bộ phận CS làm việc vào những ngày nào và trong khung giờ nào?",
+    "agent_response": "Bước 2: CS Agent xem xét trong vòng 1 ngày làm việc và xác nhận điều kiện đủ điều kiện.",
+    "retrieved_ids": [
+      "it_helpdesk_faq_3",
+      "policy_refund_v4_3",
+      "sla_p1_2026_1",
+      "policy_refund_v4_5",
+      "access_control_sop_4"
+    ],
+    "expected_retrieval_ids": [
+      "policy_refund_v4_5"
+    ],
+    "latency": 0.1243,
+    "tokens_used": 352,
+    "estimated_cost": 6.2e-05,
+    "ragas": {
+      "faithfulness": 0.855,
+      "relevancy": 0.719,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 0.25,
+        "top_k": 5,
+        "expected_ids": [
+          "policy_refund_v4_5"
+        ],
+        "retrieved_ids": [
+          "it_helpdesk_faq_3",
+          "policy_refund_v4_3",
+          "sla_p1_2026_1",
+          "policy_refund_v4_5",
+          "access_control_sop_4"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 1.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 1.0,
+        "strict-judge": 1.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.00, question relevance=0.38. strict-judge: Strict coverage=0.00; generic_penalty=False.",
+      "tokens_used": 404,
+      "estimated_cost": 0.000106
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_039",
+    "question": "Nhân viên có từ 3-5 năm kinh nghiệm được bao nhiêu ngày nghỉ phép năm?",
+    "agent_response": "1.1 Nghỉ phép năm (Annual Leave):\n- Số ngày: 12 ngày/năm cho nhân viên dưới 3 năm kinh nghiệm.",
+    "retrieved_ids": [
+      "hr_leave_policy_0",
+      "hr_leave_policy_1",
+      "access_control_sop_4",
+      "access_control_sop_0",
+      "it_helpdesk_faq_3"
+    ],
+    "expected_retrieval_ids": [
+      "hr_leave_policy_0"
+    ],
+    "latency": 0.0981,
+    "tokens_used": 362,
+    "estimated_cost": 6.5e-05,
+    "ragas": {
+      "faithfulness": 0.787,
+      "relevancy": 0.714,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "hr_leave_policy_0"
+        ],
+        "retrieved_ids": [
+          "hr_leave_policy_0",
+          "hr_leave_policy_1",
+          "access_control_sop_4",
+          "access_control_sop_0",
+          "it_helpdesk_faq_3"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.73. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 406,
+      "estimated_cost": 0.000107
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_040",
+    "question": "Khi nghỉ ốm, công ty yêu cầu những điều kiện gì về thông báo và giấy tờ?",
+    "agent_response": "- Yêu cầu: Thông báo cho Line Manager trước 9:00 sáng ngày nghỉ.",
+    "retrieved_ids": [
+      "hr_leave_policy_0",
+      "policy_refund_v4_3",
+      "hr_leave_policy_1",
+      "it_helpdesk_faq_1",
+      "access_control_sop_0"
+    ],
+    "expected_retrieval_ids": [
+      "hr_leave_policy_0"
+    ],
+    "latency": 0.1238,
+    "tokens_used": 392,
+    "estimated_cost": 6.6e-05,
+    "ragas": {
+      "faithfulness": 0.842,
+      "relevancy": 0.852,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "hr_leave_policy_0"
+        ],
+        "retrieved_ids": [
+          "hr_leave_policy_0",
+          "policy_refund_v4_3",
+          "hr_leave_policy_1",
+          "it_helpdesk_faq_1",
+          "access_control_sop_0"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 3.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 3.0,
+        "strict-judge": 3.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.62, question relevance=0.56. strict-judge: Strict coverage=0.62; generic_penalty=False.",
+      "tokens_used": 450,
+      "estimated_cost": 0.000118
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_041",
+    "question": "Nhân viên phải gửi yêu cầu nghỉ phép qua hệ thống nào và ít nhất trước bao lâu?",
+    "agent_response": "Bước 1: Nhân viên gửi yêu cầu nghỉ phép qua hệ thống HR Portal (https://hr.company.internal) ít nhất 3 ngày làm việc trước ngày nghỉ.",
+    "retrieved_ids": [
+      "hr_leave_policy_1",
+      "hr_leave_policy_0",
+      "it_helpdesk_faq_3",
+      "access_control_sop_0",
+      "policy_refund_v4_3"
+    ],
+    "expected_retrieval_ids": [
+      "hr_leave_policy_1"
+    ],
+    "latency": 0.112,
+    "tokens_used": 396,
+    "estimated_cost": 7.4e-05,
+    "ragas": {
+      "faithfulness": 0.817,
+      "relevancy": 0.871,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "hr_leave_policy_1"
+        ],
+        "retrieved_ids": [
+          "hr_leave_policy_1",
+          "hr_leave_policy_0",
+          "it_helpdesk_faq_3",
+          "access_control_sop_0",
+          "policy_refund_v4_3"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.79. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 470,
+      "estimated_cost": 0.000124
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_042",
+    "question": "Trong trường hợp khẩn cấp, có thể gửi yêu cầu nghỉ phép muộn hơn không và cần điều kiện gì để được chấp nhận?",
+    "agent_response": "Trường hợp khẩn cấp: Có thể gửi yêu cầu muộn hơn nhưng phải được Line Manager đồng ý qua tin nhắn trực tiếp.",
+    "retrieved_ids": [
+      "hr_leave_policy_1",
+      "policy_refund_v4_4",
+      "access_control_sop_4",
+      "it_helpdesk_faq_4",
+      "hr_leave_policy_0"
+    ],
+    "expected_retrieval_ids": [
+      "hr_leave_policy_1"
+    ],
+    "latency": 0.1102,
+    "tokens_used": 253,
+    "estimated_cost": 5e-05,
+    "ragas": {
+      "faithfulness": 0.76,
+      "relevancy": 0.81,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "hr_leave_policy_1"
+        ],
+        "retrieved_ids": [
+          "hr_leave_policy_1",
+          "policy_refund_v4_4",
+          "access_control_sop_4",
+          "it_helpdesk_faq_4",
+          "hr_leave_policy_0"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.65. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 466,
+      "estimated_cost": 0.000123
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_043",
+    "question": "Làm thêm giờ cần có điều kiện gì theo chính sách?",
+    "agent_response": "3.1 Điều kiện làm thêm:\nLàm thêm giờ phải được Line Manager phê duyệt trước bằng văn bản.",
+    "retrieved_ids": [
+      "policy_refund_v4_0",
+      "hr_leave_policy_2",
+      "hr_leave_policy_3",
+      "access_control_sop_3",
+      "policy_refund_v4_3"
+    ],
+    "expected_retrieval_ids": [
+      "hr_leave_policy_2"
+    ],
+    "latency": 0.1267,
+    "tokens_used": 223,
+    "estimated_cost": 4.3e-05,
+    "ragas": {
+      "faithfulness": 0.849,
+      "relevancy": 0.803,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 0.5,
+        "top_k": 5,
+        "expected_ids": [
+          "hr_leave_policy_2"
+        ],
+        "retrieved_ids": [
+          "policy_refund_v4_0",
+          "hr_leave_policy_2",
+          "hr_leave_policy_3",
+          "access_control_sop_3",
+          "policy_refund_v4_3"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.71. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 420,
+      "estimated_cost": 0.00011
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_044",
+    "question": "Hệ số lương làm thêm áp dụng cho ngày cuối tuần và ngày lễ lần lượt là bao nhiêu so với lương giờ tiêu chuẩn?",
+    "agent_response": "3.2 Hệ số lương làm thêm:\n- Ngày thường: 150% lương giờ tiêu chuẩn.",
+    "retrieved_ids": [
+      "hr_leave_policy_2",
+      "it_helpdesk_faq_4",
+      "hr_leave_policy_0",
+      "policy_refund_v4_4",
+      "it_helpdesk_faq_0"
+    ],
+    "expected_retrieval_ids": [
+      "hr_leave_policy_2"
+    ],
+    "latency": 0.0885,
+    "tokens_used": 350,
+    "estimated_cost": 6e-05,
+    "ragas": {
+      "faithfulness": 0.762,
+      "relevancy": 0.876,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "hr_leave_policy_2"
+        ],
+        "retrieved_ids": [
+          "hr_leave_policy_2",
+          "it_helpdesk_faq_4",
+          "hr_leave_policy_0",
+          "policy_refund_v4_4",
+          "it_helpdesk_faq_0"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 3.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 3.0,
+        "strict-judge": 3.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.56, question relevance=0.47. strict-judge: Strict coverage=0.56; generic_penalty=False.",
+      "tokens_used": 444,
+      "estimated_cost": 0.000117
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_045",
+    "question": "Nhân viên sau probation period được phép làm remote tối đa bao nhiêu ngày mỗi tuần?",
+    "agent_response": "4.1 Điều kiện remote:\n- Nhân viên sau probation period có thể làm remote tối đa 2 ngày/tuần.",
+    "retrieved_ids": [
+      "hr_leave_policy_3",
+      "hr_leave_policy_0",
+      "it_helpdesk_faq_0",
+      "hr_leave_policy_1",
+      "sla_p1_2026_1"
+    ],
+    "expected_retrieval_ids": [
+      "hr_leave_policy_3"
+    ],
+    "latency": 0.1105,
+    "tokens_used": 425,
+    "estimated_cost": 7.4e-05,
+    "ragas": {
+      "faithfulness": 0.777,
+      "relevancy": 0.869,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "hr_leave_policy_3"
+        ],
+        "retrieved_ids": [
+          "hr_leave_policy_3",
+          "hr_leave_policy_0",
+          "it_helpdesk_faq_0",
+          "hr_leave_policy_1",
+          "sla_p1_2026_1"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.67. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 440,
+      "estimated_cost": 0.000116
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_046",
+    "question": "Nêu các yêu cầu kỹ thuật khi làm remote theo chính sách này.",
+    "agent_response": "4.2 Yêu cầu kỹ thuật khi remote:\n- Kết nối VPN bắt buộc khi làm việc với hệ thống nội bộ.",
+    "retrieved_ids": [
+      "hr_leave_policy_3",
+      "policy_refund_v4_0",
+      "policy_refund_v4_2",
+      "access_control_sop_0",
+      "access_control_sop_4"
+    ],
+    "expected_retrieval_ids": [
+      "hr_leave_policy_3"
+    ],
+    "latency": 0.1234,
+    "tokens_used": 251,
+    "estimated_cost": 4.8e-05,
+    "ragas": {
+      "faithfulness": 0.879,
+      "relevancy": 0.736,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "hr_leave_policy_3"
+        ],
+        "retrieved_ids": [
+          "hr_leave_policy_3",
+          "policy_refund_v4_0",
+          "policy_refund_v4_2",
+          "access_control_sop_0",
+          "access_control_sop_4"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 3.5,
+      "agreement_rate": 0.75,
+      "individual_scores": {
+        "semantic-judge": 4.0,
+        "strict-judge": 3.0
+      },
+      "confidence": "medium",
+      "needs_review": false,
+      "conflict_resolution": "moderate_disagreement_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.69, question relevance=0.71. strict-judge: Strict coverage=0.69; generic_penalty=False.",
+      "tokens_used": 438,
+      "estimated_cost": 0.000115
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_047",
+    "question": "Địa chỉ email để liên hệ HR là gì?",
+    "agent_response": "Nếu vẫn không có, tạo ticket P2 kèm địa chỉ email gửi và thời gian gửi.",
+    "retrieved_ids": [
+      "it_helpdesk_faq_4",
+      "it_helpdesk_faq_0",
+      "hr_leave_policy_4",
+      "it_helpdesk_faq_3",
+      "it_helpdesk_faq_1"
+    ],
+    "expected_retrieval_ids": [
+      "hr_leave_policy_4"
+    ],
+    "latency": 0.0886,
+    "tokens_used": 247,
+    "estimated_cost": 4.5e-05,
+    "ragas": {
+      "faithfulness": 0.816,
+      "relevancy": 0.874,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 0.3333333333333333,
+        "top_k": 5,
+        "expected_ids": [
+          "hr_leave_policy_4"
+        ],
+        "retrieved_ids": [
+          "it_helpdesk_faq_4",
+          "it_helpdesk_faq_0",
+          "hr_leave_policy_4",
+          "it_helpdesk_faq_3",
+          "it_helpdesk_faq_1"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 1.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 1.0,
+        "strict-judge": 1.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.00, question relevance=0.67. strict-judge: Strict coverage=0.00; generic_penalty=False.",
+      "tokens_used": 378,
+      "estimated_cost": 9.9e-05
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_048",
+    "question": "HR làm việc vào những ngày nào và giờ hành chính bắt đầu và kết thúc vào mấy giờ?",
+    "agent_response": "4.2 Yêu cầu kỹ thuật khi remote:\n- Kết nối VPN bắt buộc khi làm việc với hệ thống nội bộ.",
+    "retrieved_ids": [
+      "hr_leave_policy_3",
+      "it_helpdesk_faq_3",
+      "sla_p1_2026_1",
+      "access_control_sop_5",
+      "access_control_sop_3"
+    ],
+    "expected_retrieval_ids": [
+      "hr_leave_policy_4"
+    ],
+    "latency": 0.1567,
+    "tokens_used": 355,
+    "estimated_cost": 6.3e-05,
+    "ragas": {
+      "faithfulness": 0.862,
+      "relevancy": 0.9,
+      "retrieval": {
+        "hit_rate": 0.0,
+        "mrr": 0.0,
+        "top_k": 5,
+        "expected_ids": [
+          "hr_leave_policy_4"
+        ],
+        "retrieved_ids": [
+          "hr_leave_policy_3",
+          "it_helpdesk_faq_3",
+          "sla_p1_2026_1",
+          "access_control_sop_5",
+          "access_control_sop_3"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 1.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 1.0,
+        "strict-judge": 1.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.00, question relevance=0.33. strict-judge: Strict coverage=0.00; generic_penalty=False.",
+      "tokens_used": 416,
+      "estimated_cost": 0.000109
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_049",
+    "question": "P1 — CRITICAL được định nghĩa như thế nào?",
+    "agent_response": "P1 — CRITICAL (Khẩn cấp):\nĐịnh nghĩa: Sự cố ảnh hưởng toàn bộ hệ thống production, không có workaround.",
+    "retrieved_ids": [
+      "sla_p1_2026_0",
+      "it_helpdesk_faq_3",
+      "it_helpdesk_faq_1",
+      "access_control_sop_3",
+      "policy_refund_v4_4"
+    ],
+    "expected_retrieval_ids": [
+      "sla_p1_2026_0"
+    ],
+    "latency": 0.088,
+    "tokens_used": 330,
+    "estimated_cost": 6.1e-05,
+    "ragas": {
+      "faithfulness": 0.946,
+      "relevancy": 0.84,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "sla_p1_2026_0"
+        ],
+        "retrieved_ids": [
+          "sla_p1_2026_0",
+          "it_helpdesk_faq_3",
+          "it_helpdesk_faq_1",
+          "access_control_sop_3",
+          "policy_refund_v4_4"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.50. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 422,
+      "estimated_cost": 0.000111
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_050",
+    "question": "Theo tài liệu, cho ví dụ cụ thể cho mức độ P2 — HIGH?",
+    "agent_response": "Tài liệu này quy định quy trình cấp phép truy cập vào các hệ thống nội bộ của công ty.",
+    "retrieved_ids": [
+      "sla_p1_2026_0",
+      "access_control_sop_0",
+      "it_helpdesk_faq_4",
+      "hr_leave_policy_0",
+      "policy_refund_v4_2"
+    ],
+    "expected_retrieval_ids": [
+      "sla_p1_2026_0"
+    ],
+    "latency": 0.1033,
+    "tokens_used": 272,
+    "estimated_cost": 5e-05,
+    "ragas": {
+      "faithfulness": 0.813,
+      "relevancy": 0.886,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "sla_p1_2026_0"
+        ],
+        "retrieved_ids": [
+          "sla_p1_2026_0",
+          "access_control_sop_0",
+          "it_helpdesk_faq_4",
+          "hr_leave_policy_0",
+          "policy_refund_v4_2"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 1.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 1.0,
+        "strict-judge": 1.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.00, question relevance=0.50. strict-judge: Strict coverage=0.00; generic_penalty=False.",
+      "tokens_used": 420,
+      "estimated_cost": 0.00011
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_051",
+    "question": "Thời gian phản hồi ban đầu (first response) cho Ticket P1 là bao lâu?",
+    "agent_response": "Ticket P1:\n- Phản hồi ban đầu (first response): 15 phút kể từ khi ticket được tạo.",
+    "retrieved_ids": [
+      "sla_p1_2026_1",
+      "access_control_sop_1",
+      "it_helpdesk_faq_4",
+      "it_helpdesk_faq_3",
+      "sla_p1_2026_4"
+    ],
+    "expected_retrieval_ids": [
+      "sla_p1_2026_1"
+    ],
+    "latency": 0.0811,
+    "tokens_used": 421,
+    "estimated_cost": 7.2e-05,
+    "ragas": {
+      "faithfulness": 0.929,
+      "relevancy": 0.87,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "sla_p1_2026_1"
+        ],
+        "retrieved_ids": [
+          "sla_p1_2026_1",
+          "access_control_sop_1",
+          "it_helpdesk_faq_4",
+          "it_helpdesk_faq_3",
+          "sla_p1_2026_4"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.60. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 410,
+      "estimated_cost": 0.000108
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_052",
+    "question": "Ticket P1 yêu cầu thông báo tới stakeholders như thế nào?",
+    "agent_response": "Q: Laptop bị hỏng phải báo cáo như thế nào?",
+    "retrieved_ids": [
+      "it_helpdesk_faq_3",
+      "sla_p1_2026_2",
+      "it_helpdesk_faq_1",
+      "hr_leave_policy_3",
+      "sla_p1_2026_3"
+    ],
+    "expected_retrieval_ids": [
+      "sla_p1_2026_1"
+    ],
+    "latency": 0.149,
+    "tokens_used": 301,
+    "estimated_cost": 5e-05,
+    "ragas": {
+      "faithfulness": 0.786,
+      "relevancy": 0.711,
+      "retrieval": {
+        "hit_rate": 0.0,
+        "mrr": 0.0,
+        "top_k": 5,
+        "expected_ids": [
+          "sla_p1_2026_1"
+        ],
+        "retrieved_ids": [
+          "it_helpdesk_faq_3",
+          "sla_p1_2026_2",
+          "it_helpdesk_faq_1",
+          "hr_leave_policy_3",
+          "sla_p1_2026_3"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 1.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 1.0,
+        "strict-judge": 1.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.00, question relevance=0.33. strict-judge: Strict coverage=0.00; generic_penalty=False.",
+      "tokens_used": 398,
+      "estimated_cost": 0.000105
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_053",
+    "question": "Trong Bước 1, on-call engineer phải xác nhận severity trong bao lâu?",
+    "agent_response": "Bước 1: Tiếp nhận\nOn-call engineer nhận alert hoặc ticket, xác nhận severity trong 5 phút.",
+    "retrieved_ids": [
+      "sla_p1_2026_2",
+      "policy_refund_v4_3",
+      "sla_p1_2026_3",
+      "it_helpdesk_faq_3",
+      "policy_refund_v4_1"
+    ],
+    "expected_retrieval_ids": [
+      "sla_p1_2026_2"
+    ],
+    "latency": 0.1089,
+    "tokens_used": 279,
+    "estimated_cost": 5.2e-05,
+    "ragas": {
+      "faithfulness": 0.903,
+      "relevancy": 0.703,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "sla_p1_2026_2"
+        ],
+        "retrieved_ids": [
+          "sla_p1_2026_2",
+          "policy_refund_v4_3",
+          "sla_p1_2026_3",
+          "it_helpdesk_faq_3",
+          "policy_refund_v4_1"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.75. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 404,
+      "estimated_cost": 0.000106
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_054",
+    "question": "Trong Bước 4, engineer cần cập nhật tiến độ lên ticket bao lâu một lần và phải làm gì nếu cần hỗ trợ thêm?",
+    "agent_response": "Bước 4: Xử lý\nEngineer cập nhật tiến độ lên ticket mỗi 30 phút.",
+    "retrieved_ids": [
+      "sla_p1_2026_2",
+      "it_helpdesk_faq_0",
+      "it_helpdesk_faq_3",
+      "policy_refund_v4_3",
+      "sla_p1_2026_4"
+    ],
+    "expected_retrieval_ids": [
+      "sla_p1_2026_2"
+    ],
+    "latency": 0.1422,
+    "tokens_used": 348,
+    "estimated_cost": 5.9e-05,
+    "ragas": {
+      "faithfulness": 0.831,
+      "relevancy": 0.723,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "sla_p1_2026_2"
+        ],
+        "retrieved_ids": [
+          "sla_p1_2026_2",
+          "it_helpdesk_faq_0",
+          "it_helpdesk_faq_3",
+          "policy_refund_v4_3",
+          "sla_p1_2026_4"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 3.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 3.0,
+        "strict-judge": 3.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.56, question relevance=0.54. strict-judge: Strict coverage=0.56; generic_penalty=False.",
+      "tokens_used": 436,
+      "estimated_cost": 0.000114
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_055",
+    "question": "Hệ thống ticket nào được sử dụng và tên dự án liên quan là gì?",
+    "agent_response": "Q: Phần mềm VPN nào công ty dùng?",
+    "retrieved_ids": [
+      "it_helpdesk_faq_1",
+      "it_helpdesk_faq_4",
+      "sla_p1_2026_0",
+      "access_control_sop_3",
+      "it_helpdesk_faq_3"
+    ],
+    "expected_retrieval_ids": [
+      "sla_p1_2026_3"
+    ],
+    "latency": 0.1244,
+    "tokens_used": 316,
+    "estimated_cost": 5.1e-05,
+    "ragas": {
+      "faithfulness": 0.852,
+      "relevancy": 0.773,
+      "retrieval": {
+        "hit_rate": 0.0,
+        "mrr": 0.0,
+        "top_k": 5,
+        "expected_ids": [
+          "sla_p1_2026_3"
+        ],
+        "retrieved_ids": [
+          "it_helpdesk_faq_1",
+          "it_helpdesk_faq_4",
+          "sla_p1_2026_0",
+          "access_control_sop_3",
+          "it_helpdesk_faq_3"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 1.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 1.0,
+        "strict-judge": 1.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.00, question relevance=0.25. strict-judge: Strict coverage=0.00; generic_penalty=False.",
+      "tokens_used": 376,
+      "estimated_cost": 9.9e-05
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_056",
+    "question": "PagerDuty sẽ làm gì khi có ticket P1 mới?",
+    "agent_response": "Ticket system: Jira (project IT-SUPPORT)\nSlack channel: #incident-p1, #incident-p2\nPagerDuty: Tự động nhắn on-call khi P1 ticket mới\nHotline on-call: ext.",
+    "retrieved_ids": [
+      "sla_p1_2026_3",
+      "it_helpdesk_faq_2",
+      "it_helpdesk_faq_0",
+      "sla_p1_2026_1",
+      "it_helpdesk_faq_4"
+    ],
+    "expected_retrieval_ids": [
+      "sla_p1_2026_3"
+    ],
+    "latency": 0.1454,
+    "tokens_used": 281,
+    "estimated_cost": 5.9e-05,
+    "ragas": {
+      "faithfulness": 0.832,
+      "relevancy": 0.845,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "sla_p1_2026_3"
+        ],
+        "retrieved_ids": [
+          "sla_p1_2026_3",
+          "it_helpdesk_faq_2",
+          "it_helpdesk_faq_0",
+          "sla_p1_2026_1",
+          "it_helpdesk_faq_4"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.75. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 436,
+      "estimated_cost": 0.000114
+    },
+    "status": "pass"
+  },
+  {
+    "test_case": "case_057",
+    "question": "Ngày hiệu lực của phiên bản v2026.1 là ngày nào?",
+    "agent_response": "Các đơn hàng đặt trước ngày có hiệu lực sẽ áp dụng theo chính sách hoàn tiền phiên bản 3.",
+    "retrieved_ids": [
+      "policy_refund_v4_0",
+      "sla_p1_2026_4",
+      "it_helpdesk_faq_1",
+      "sla_p1_2026_1",
+      "hr_leave_policy_2"
+    ],
+    "expected_retrieval_ids": [
+      "sla_p1_2026_4"
+    ],
+    "latency": 0.1462,
+    "tokens_used": 215,
+    "estimated_cost": 4.2e-05,
+    "ragas": {
+      "faithfulness": 0.827,
+      "relevancy": 0.736,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 0.5,
+        "top_k": 5,
+        "expected_ids": [
+          "sla_p1_2026_4"
+        ],
+        "retrieved_ids": [
+          "policy_refund_v4_0",
+          "sla_p1_2026_4",
+          "it_helpdesk_faq_1",
+          "sla_p1_2026_1",
+          "hr_leave_policy_2"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 1.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 1.0,
+        "strict-judge": 1.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=0.00, question relevance=0.71. strict-judge: Strict coverage=0.00; generic_penalty=False.",
+      "tokens_used": 392,
+      "estimated_cost": 0.000103
+    },
+    "status": "fail"
+  },
+  {
+    "test_case": "case_058",
+    "question": "Phiên bản nào đã cập nhật SLA P1 resolution từ 6 giờ xuống 4 giờ và ngày hiệu lực của nó là khi nào?",
+    "agent_response": "v2026.1 (2026-01-15): Cập nhật SLA P1 resolution từ 6 giờ xuống 4 giờ.",
+    "retrieved_ids": [
+      "sla_p1_2026_4",
+      "policy_refund_v4_0",
+      "sla_p1_2026_1",
+      "sla_p1_2026_2",
+      "it_helpdesk_faq_1"
+    ],
+    "expected_retrieval_ids": [
+      "sla_p1_2026_4"
+    ],
+    "latency": 0.0997,
+    "tokens_used": 291,
+    "estimated_cost": 5.1e-05,
+    "ragas": {
+      "faithfulness": 0.891,
+      "relevancy": 0.745,
+      "retrieval": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "top_k": 5,
+        "expected_ids": [
+          "sla_p1_2026_4"
+        ],
+        "retrieved_ids": [
+          "sla_p1_2026_4",
+          "policy_refund_v4_0",
+          "sla_p1_2026_1",
+          "sla_p1_2026_2",
+          "it_helpdesk_faq_1"
+        ]
+      }
+    },
+    "judge": {
+      "final_score": 5.0,
+      "agreement_rate": 1.0,
+      "individual_scores": {
+        "semantic-judge": 5.0,
+        "strict-judge": 5.0
+      },
+      "confidence": "high",
+      "needs_review": false,
+      "conflict_resolution": "consensus_average",
+      "judge_mode": "heuristic_fallback",
+      "reasoning": "semantic-judge: Semantic coverage=1.00, question relevance=0.50. strict-judge: Strict coverage=1.00; generic_penalty=False.",
+      "tokens_used": 414,
+      "estimated_cost": 0.000109
+    },
+    "status": "pass"
+  }
+]

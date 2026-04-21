@@ -1,0 +1,80 @@
+{
+  "metadata": {
+    "version": "Agent_V2_Optimized",
+    "total": 58,
+    "pass_count": 31,
+    "fail_count": 27,
+    "timestamp": "2026-04-21 09:51:39"
+  },
+  "metrics": {
+    "avg_score": 3.181,
+    "hit_rate": 0.9138,
+    "mrr": 0.8233,
+    "agreement_rate": 0.9698,
+    "avg_latency": 0.1199,
+    "total_tokens": 41196,
+    "agent_tokens": 16818,
+    "judge_tokens": 24378,
+    "total_cost": 0.009441,
+    "agent_cost": 0.003034,
+    "judge_cost": 0.006407,
+    "needs_review_count": 0
+  },
+  "performance": {
+    "avg_latency_seconds": 0.1199,
+    "tokens_per_case": 710.28,
+    "cost_per_case": 0.000163
+  },
+  "release_gate": {
+    "decision": "APPROVE",
+    "delta": {
+      "avg_score": 0.0,
+      "hit_rate": 0.0345,
+      "mrr": 0.013,
+      "agreement_rate": 0.0,
+      "avg_latency": 0.0176,
+      "total_cost": -2.6e-05
+    },
+    "checks": {
+      "quality_not_regressed": true,
+      "retrieval_acceptable": true,
+      "judge_reliable": true,
+      "latency_acceptable": true,
+      "cost_acceptable": true
+    },
+    "reason": "All release checks passed."
+  },
+  "regression": {
+    "decision": "APPROVE",
+    "delta": {
+      "avg_score": 0.0,
+      "hit_rate": 0.0345,
+      "mrr": 0.013,
+      "agreement_rate": 0.0,
+      "avg_latency": 0.0176,
+      "total_cost": -2.6e-05
+    },
+    "checks": {
+      "quality_not_regressed": true,
+      "retrieval_acceptable": true,
+      "judge_reliable": true,
+      "latency_acceptable": true,
+      "cost_acceptable": true
+    },
+    "reason": "All release checks passed."
+  },
+  "v1_metrics": {
+    "avg_score": 3.181,
+    "hit_rate": 0.8793,
+    "mrr": 0.8103,
+    "agreement_rate": 0.9698,
+    "avg_latency": 0.1023,
+    "total_tokens": 41386,
+    "agent_tokens": 17022,
+    "judge_tokens": 24364,
+    "total_cost": 0.009467,
+    "agent_cost": 0.003063,
+    "judge_cost": 0.006404,
+    "needs_review_count": 0
+  }
+}
