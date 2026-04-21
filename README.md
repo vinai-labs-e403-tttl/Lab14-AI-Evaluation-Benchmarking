@@ -57,25 +57,3 @@ Báo cáo 5 Whys phải chỉ ra được lỗi nằm ở đâu: Ingestion pipel
 ## 🔧 Hướng dẫn chạy
 
 ```bash
-# 1. Cài đặt dependencies
-pip install -r requirements.txt
-
-# 2. Tạo Golden Dataset (chạy trước khi benchmark)
-python data/synthetic_gen.py
-
-# 3. Chạy Benchmark & tạo reports
-python main.py
-
-# 4. Kiểm tra định dạng trước khi nộp
-python check_lab.py
-```
-
----
-
-## ⚠️ Lưu ý quan trọng
-- **Bắt buộc** chạy `python data/synthetic_gen.py` trước để tạo file `data/golden_set.jsonl`. File này không được commit sẵn trong repo.
-- Trước khi nộp bài, hãy chạy `python check_lab.py` để đảm bảo định dạng dữ liệu đã chuẩn. Bất kỳ lỗi định dạng nào dẫn đến việc script chấm điểm tự động không chạy được sẽ bị trừ 5 điểm thủ tục.
-- File `.env` chứa API Key **KHÔNG** được push lên GitHub.
-
----
-*Chúc nhóm bạn xây dựng được một Evaluation Factory thực sự mạnh mẽ!*
