@@ -80,6 +80,7 @@ def _overlap_ratio(reference: Iterable[str], candidate: Iterable[str]) -> float:
 
 
 def _score_from_ratio(ratio: float) -> float:
+    """Semantic judge thresholds — rộng rãi hơn."""
     if ratio >= 0.85:
         return 5.0
     if ratio >= 0.65:
@@ -87,6 +88,23 @@ def _score_from_ratio(ratio: float) -> float:
     if ratio >= 0.45:
         return 3.0
     if ratio >= 0.25:
+        return 2.0
+    return 1.0
+
+
+def _score_from_ratio_strict(ratio: float) -> float:
+    """
+    Strict judge thresholds — cao hơn ~10% so với semantic → tạo disagreement
+    có ý nghĩa trên các case borderline. Mô phỏng hành vi của một evaluator
+    khắt khe hơn (yêu cầu coverage cao mới cho điểm cao).
+    """
+    if ratio >= 0.90:
+        return 5.0
+    if ratio >= 0.75:
+        return 4.0
+    if ratio >= 0.55:
+        return 3.0
+    if ratio >= 0.30:
         return 2.0
     return 1.0
 
@@ -156,7 +174,7 @@ class LLMJudge:
         normalized_answer = _normalize(answer)
         generic_penalty = any(marker in normalized_answer for marker in generic_markers)
 
-        score = _score_from_ratio(truth_coverage)
+        score = _score_from_ratio_strict(truth_coverage)
         if len(answer_terms) < 4:
             score -= 1.0
         if generic_penalty:
